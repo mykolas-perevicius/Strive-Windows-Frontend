@@ -90,6 +90,7 @@ export function ActiveWorkoutPage() {
     const sessionRef = useRef(session);
     const redirectTimerRef = useRef<NodeJS.Timeout | number | null>(null);
 
+    // --- useEffects (loading, timers, ref update, navigation) remain the same as previous correct version ---
     // --- useEffect for loading session ---
     useEffect(() => {
         console.log("Attempting to load session for template ID:", templateId);
@@ -125,7 +126,6 @@ export function ActiveWorkoutPage() {
         }, 1000);
 
         return () => clearInterval(timerInterval);
-     // No eslint-disable needed here anymore
     }, [session?.status, session?.startTime]);
 
     // --- useEffect to update ref ---
@@ -140,12 +140,10 @@ export function ActiveWorkoutPage() {
             return;
         }
 
-        // Use const as it's only assigned once here
         const intervalId: NodeJS.Timeout | number | undefined = setInterval(() => {
-            // Inner function `updateRemainingTime` removed for simplicity, logic moved directly here
              if (!sessionRef.current?.restEndTime || !sessionRef.current?.isResting) {
                  setRestTimeRemaining(0);
-                 clearInterval(intervalId); // Clear self
+                 clearInterval(intervalId);
                  return;
              }
 
@@ -156,7 +154,7 @@ export function ActiveWorkoutPage() {
              setRestTimeRemaining(remaining);
 
              if (remaining <= 0) {
-                 clearInterval(intervalId); // Clear self
+                 clearInterval(intervalId);
                  setSession(prev => {
                      if (prev?.isResting && prev?.restEndTime && new Date(prev.restEndTime).getTime() <= Date.now()) {
                          console.log("Rest finished naturally!");
@@ -173,14 +171,12 @@ export function ActiveWorkoutPage() {
              }
         }, 500);
 
-         // Initial check in case timer should already be 0
          const initialEndTimeMs = new Date(session.restEndTime).getTime();
          const initialNowMs = Date.now();
          const initialRemaining = Math.max(0, Math.ceil((initialEndTimeMs - initialNowMs) / 1000));
          setRestTimeRemaining(initialRemaining);
          if (initialRemaining <= 0) {
-              clearInterval(intervalId); // Clear immediately if already expired
-              // Trigger state update similar to inside interval
+              clearInterval(intervalId);
               setSession(prev => {
                  if (prev?.isResting && prev?.restEndTime && new Date(prev.restEndTime).getTime() <= Date.now()) {
                      return { ...prev, isResting: false, restEndTime: null, restDurationSeconds: 0 };
@@ -191,9 +187,8 @@ export function ActiveWorkoutPage() {
 
 
         return () => {
-            clearInterval(intervalId); // Cleanup on unmount or dependency change
+            clearInterval(intervalId);
         };
-     // No eslint-disable needed here anymore
     }, [session?.isResting, session?.restEndTime]);
 
     // --- useEffect for handling automatic navigation on completion ---
@@ -220,17 +215,17 @@ export function ActiveWorkoutPage() {
     const currentExercise = useMemo(() => {
          if (!session || session.currentExerciseIndex >= session.exercises.length) return null;
          return session.exercises[session.currentExerciseIndex];
-      // No eslint-disable needed here anymore
-    }, [session?.exercises, session?.currentExerciseIndex]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [session?.exercises, session?.currentExerciseIndex]); // Re-add disable comment
 
     const currentSetTarget = useMemo(() => {
          if (!session || !currentExercise || session.currentSetIndex >= currentExercise.sets) return null;
          return { reps: currentExercise.reps, weight: currentExercise.weight };
-       // No eslint-disable needed here anymore
-    }, [currentExercise, session?.currentSetIndex]);
+       // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentExercise, session?.currentSetIndex]); // Re-add disable comment
 
 
-    // --- Event Handlers (Using useCallback) ---
+    // --- Event Handlers (useCallback) remain the same ---
      const handleCompleteSet = useCallback(() => {
         if (!session || session.status !== 'in-progress' || !currentExercise || currentSetTarget === null || session.isResting) return;
         const repsCompleted = parseInt(currentReps, 10);
@@ -336,7 +331,7 @@ export function ActiveWorkoutPage() {
     }, []);
 
 
-     // --- Render Logic ---
+     // --- Render Logic remains the same ---
     if (isLoading) { return <div className="container mx-auto p-6 text-center">Loading Workout...</div>; }
     if (error) { return ( <div className="container mx-auto p-6 text-center text-destructive"> <p>{error}</p> <Button onClick={() => navigate('/start-workout', { replace: true })} className="mt-4"> Go Back </Button> </div> ); }
     if (session?.status === 'completed' && !isLoading) { return ( <div className="container mx-auto p-6 text-center"> <h2 className="text-xl font-semibold mb-4">Workout Session Complete!</h2> <p className="text-muted-foreground">Redirecting...</p> </div> ); }
@@ -348,7 +343,7 @@ export function ActiveWorkoutPage() {
     const restProgress = session.restDurationSeconds > 0 && session.isResting ? Math.max(0, Math.round(((session.restDurationSeconds - restTimeRemaining) / session.restDurationSeconds) * 100)) : 0;
     const formattedRestTime = formatTimeElapsed(restTimeRemaining);
 
-    // --- Main JSX (No changes needed below this line from previous version) ---
+    // --- Main JSX remains the same ---
     return (
         <div className="container relative mx-auto max-w-2xl p-4 md:p-6 space-y-6">
              {/* Rest Dialog */}
