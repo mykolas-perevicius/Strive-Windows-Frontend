@@ -8,39 +8,21 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useNavigate } from "react-router-dom";
+import { workoutTemplates } from "@/data/dummyWorkouts"; // <--- Import from new file
 
-// --- Dummy Template Data ---
-const workoutTemplates = {
-  barbell: [
-    { id: "b1", name: "Day 1", exercises: ["Bench Press", "Squat", "Deadlift"] },
-    { id: "b2", name: "Day 2", exercises: ["Incline Bench Press", "Front Squat", "Romanian Deadlift"] },
-    { id: "b3", name: "Day 3", exercises: ["Bench Press", "Squat", "Deadlift"] },
-    { id: "b4", name: "Day 4", exercises: ["Incline Bench Press", "Front Squat", "Romanian Deadlift"] },
-  ],
-  bodyweight: [
-    { id: "bwA", name: "Day A", exercises: ["Pull Up", "Decline Push Up", "Bodyweight Row"] },
-    { id: "bwB", name: "Day B", exercises: ["Chin Up", "Tricep Dip", "Underhand Bodyweight Row"] },
-    { id: "bwC", name: "Day C", exercises: ["Placeholder..."] },
-    { id: "bwD", name: "Day D", exercises: ["Placeholder..."] },
-  ],
-};
-// --- End Dummy Data ---
+// Dummy data moved to src/data/dummyWorkouts.ts
 
 export function StartWorkoutPage() {
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   const handleStartBlank = () => {
-    console.log("Starting Blank Workout");
-    // Use navigate for actual routing
-    navigate('/create-workout'); // Example path to a blank workout creator page
-    // alert("Navigate to blank workout screen (TODO)"); // Remove alert
+    console.log("Navigating to create blank workout page");
+    navigate('/app/workouts/new');
   };
 
   const handleSelectTemplate = (templateId: string, category: string) => {
-    console.log(`Selected Template: ${templateId} from ${category}`);
-    // Use navigate for actual routing, potentially passing template info
-    navigate(`/active-workout?template=${templateId}`); // Example path to workout screen with template
-    // alert(`Navigate to workout screen with template ${templateId} (TODO)`); // Remove alert
+    console.log(`Selected Template: ${templateId} from ${category}. Navigating...`);
+    navigate(`/app/active-workout?template=${templateId}`);
   };
 
   return (
@@ -64,7 +46,8 @@ export function StartWorkoutPage() {
             <CardTitle>Barbell</CardTitle>
           </CardHeader>
           <CardContent className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {workoutTemplates.barbell.map((template) => (
+            {/* Check if workoutTemplates and barbell exist before mapping */}
+            {workoutTemplates?.barbell?.map((template) => (
               <Button
                 key={template.id}
                 variant="outline"
@@ -88,7 +71,8 @@ export function StartWorkoutPage() {
             <CardTitle>Bodyweight</CardTitle>
           </CardHeader>
           <CardContent className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-             {workoutTemplates.bodyweight.map((template) => (
+             {/* Check if workoutTemplates and bodyweight exist before mapping */}
+             {workoutTemplates?.bodyweight?.map((template) => (
               <Button
                 key={template.id}
                 variant="outline"
@@ -109,5 +93,3 @@ export function StartWorkoutPage() {
     </div>
   );
 }
-
-export default StartWorkoutPage;

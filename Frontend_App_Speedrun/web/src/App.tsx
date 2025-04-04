@@ -15,10 +15,12 @@ import { SettingsLayout } from '@/components/layout/SettingsLayout';
 import ProfilePage from '@/pages/app/ProfilePage';
 // import PlaceholderPage from '@/pages/app/PlaceholderPage'; // Can remove import
 import PersonalRecordsPage from '@/pages/app/PersonalRecordsPage';
-import StartWorkoutPage from '@/pages/app/StartWorkoutPage';
+import { StartWorkoutPage } from '@/pages/app/StartWorkoutPage';
 import WorkoutsPage from '@/pages/app/WorkoutsPage';
 import CalendarPage from '@/pages/app/CalendarPage';
-import StatsPage from '@/pages/app/StatsPage'; // <-- Import StatsPage
+import { StatsPage } from '@/pages/app/StatsPage';
+import { CreateWorkoutPage } from '@/pages/app/CreateWorkoutPage'; // *** IMPORT THE NEW PAGE ***
+import { ActiveWorkoutPage } from '@/pages/app/ActiveWorkoutPage';
 
 // Settings Pages
 import SettingsAccountPage from '@/pages/app/settings/SettingsAccountPage';
@@ -46,8 +48,16 @@ function App() {
         <Route path="/workouts" element={<WorkoutsPage />} />
         <Route path="/start-workout" element={<StartWorkoutPage />} />
         <Route path="/calendar" element={<CalendarPage />} />
-        <Route path="/stats" element={<StatsPage />} /> {/* <-- Use new component */}
+        <Route path="/stats" element={<StatsPage />} />
         <Route path="/personal-records" element={<PersonalRecordsPage />} />
+        {/* *** ADD THE ROUTE FOR CREATING A WORKOUT *** */}
+        <Route path="/app/workouts/new" element={<CreateWorkoutPage />} />
+        <Route path="/app/active-workout" element={<ActiveWorkoutPage />} />
+        {/* Example route for viewing/editing a specific workout template (future) */}
+        {/* <Route path="/app/workouts/:templateId" element={<ViewWorkoutTemplatePage />} /> */}
+        {/* Example route for an active workout session (future) */}
+        {/* <Route path="/app/active-workout/:sessionId" element={<ActiveWorkoutPage />} /> */}
+
       </Route> {/* End of routes within MainLayout */}
 
 
