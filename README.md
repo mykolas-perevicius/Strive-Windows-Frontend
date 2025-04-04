@@ -2,7 +2,7 @@
 
 This repository contains the frontend application for **Frontend App Speedrun**, initially focusing on a native Windows setup for the web component. Future plans include an Android application.
 
--   **Web:** A modern React application using Vite, TypeScript, Tailwind CSS v4, and Shadcn/ui, developed **natively on Windows**.
+-   **Web:** A modern React application using Vite, TypeScript, Tailwind CSS v4, and Shadcn/ui, developed **natively on Windows**. This component has reached a Minimal Viable Prototype (MVP) stage.
 -   **Android:** (Placeholder) A native Android application using Kotlin.
 
 > **Note:** This is currently a frontend-only setup. Backend integration (e.g., authentication, API endpoints) is planned for future phases.
@@ -20,114 +20,105 @@ Below is an overview of the repository's directory layout:
     │   ├── node_modules/          # (Ignored by git) Project dependencies
     │   ├── public/                # Static assets
     │   ├── src/                   # Source code
-    │   │   ├── components/        # Shadcn/ui components
-    │   │   │   └── ui/
-    │   │   │       └── button.tsx # Example component
-    │   │   ├── lib/               # Shadcn/ui utilities
-    │   │   │   └── utils.ts
-    │   │   ├── App.tsx            # Main App component
+    │   │   ├── components/        # Reusable components
+    │   │   │   ├── contexts/      # React Context Providers (e.g., AppSettingsProvider)
+    │   │   │   ├── layout/        # Layout components (MainLayout, BottomNav, etc.)
+    │   │   │   ├── settings/      # Components specific to settings (SettingsNav)
+    │   │   │   └── ui/            # Shadcn/ui generated components
+    │   │   ├── contexts/          # Context definitions (e.g., appSettingsContext.ts) - *Could merge with components/contexts/*
+    │   │   ├── hooks/             # Custom React hooks (e.g., useAppSettings)
+    │   │   ├── lib/               # Utility functions (e.g., cn from Shadcn)
+    │   │   ├── pages/             # Page-level components
+    │   │   │   ├── app/           # Authenticated app screens
+    │   │   │   │   ├── settings/  # Specific settings pages
+    │   │   │   │   └── ...        # (ProfilePage, WorkoutsPage, CalendarPage, etc.)
+    │   │   │   └── ...            # (LandingPage, LoginPage, etc.)
+    │   │   ├── App.tsx            # Main App component (routing)
     │   │   ├── index.css          # Tailwind directives & global styles
     │   │   └── main.tsx           # React entry point
-    │   ├── .eslintrc.cjs          # ESLint configuration
     │   ├── .gitignore             # Git ignore for web directory
     │   ├── components.json        # Shadcn/ui configuration
+    │   ├── eslint.config.js       # ESLint configuration (using new flat config format)
     │   ├── index.html             # HTML template
     │   ├── package-lock.json      # Exact dependency versions
     │   ├── package.json           # Dependencies & scripts
-    │   ├── postcss.config.js      # PostCSS configuration (for Tailwind)
-    │   ├── tailwind.config.js     # Tailwind CSS v4 configuration
+    │   ├── README.md              # README specific to the web application MVP
+    │   ├── tailwind.config.ts     # Tailwind CSS v4 configuration (TypeScript)
     │   ├── tsconfig.app.json      # TypeScript config for app code
-    │   ├── tsconfig.json          # Root TypeScript configuration
-    │   ├── tsconfig.node.json     # TypeScript config for Node context (Vite config)
+    │   ├── tsconfig.json          # Root TypeScript configuration for web/
+    │   ├── tsconfig.node.json     # TypeScript config for Node context (Vite/Tailwind config)
     │   └── vite.config.ts         # Vite configuration
     ├── android/                   # (Placeholder) Native Android application (Kotlin)
     │   # ... (Android structure will be added later)
-    └── .gitignore                 # Root Git ignore file
+    ├── .gitignore                 # Root Git ignore file
+    └── README.md                  # This file (Root project README)
 
 ---
 
-## Getting Started
+## Getting Started (Web MVP)
 
 ### Prerequisites
 
-#### For Web Development (Native Windows):
--   [Node.js](https://nodejs.org/) (v22.14.0+ recommended) - Installed **directly** on Windows.
--   [npm](https://www.npmjs.com/) (v11.2.0+ recommended) - Comes with Node.js.
--   [Git](https://git-scm.com/) - For version control.
--   Windows PowerShell - For running setup scripts (optional) and commands.
--   Your favorite code editor (e.g., [VSCode](https://code.visualstudio.com/))
+*   [Node.js](https://nodejs.org/) (v22+ recommended) - Installed **directly** on Windows.
+*   [npm](https://www.npmjs.com/) (v11+ recommended) - Comes with Node.js.
+*   [Git](https://git-scm.com/) - For version control.
+*   Windows PowerShell or Command Prompt.
+*   Your favorite code editor (e.g., [VSCode](https://code.visualstudio.com/)) with extensions like Tailwind CSS IntelliSense, Prettier, ESLint.
 
-#### For Android Development (Placeholder):
--   [Android Studio](https://developer.android.com/studio)
--   Android SDK and JDK
+### Running the Web Application
 
----
-
-### Windows-Specific Setup (Native - This Project's Approach)
-
-This project's web component is configured for **native Windows development**, meaning tools are installed and run directly on Windows without WSL or Docker.
-
-1.  **Install Prerequisites:** Ensure Node.js, npm, and Git are installed directly on your Windows machine and accessible from your terminal (PowerShell or Command Prompt).
-2.  **Clone the Repository:** Use Git to clone this repository to your local machine.
-3.  **Code Editor:** Use VS Code (or your preferred editor) installed on Windows.
-    *   **Recommended VS Code Extensions:**
-        *   `Tailwind CSS IntelliSense` (by Tailwind Labs)
-        *   `Prettier - Code formatter` (by Prettier) - Consider `npm install -D prettier prettier-plugin-tailwindcss` and configure `.prettierrc` in the `web` dir.
-        *   `ESLint` (by Microsoft)
-        *   `PostCSS Language Support` (by csstools)
-4.  **Navigate & Install:** Open PowerShell/CMD, navigate into the `web` directory, and run `npm install`.
-5.  **Run:** Use `npm run dev` inside the `web` directory to start the development server.
-
-*(Note: The setup script `setup_project.ps1` included in previous instructions performed some initial steps automatically but is not required for cloning and running the existing setup).*
-
----
-
-### Setting Up the Web Application
-
-1.  **Clone the repository:**
+1.  **Clone the repository (if you haven't already):**
     ```bash
     git clone https://github.com/mykolas-perevicius/Strive-Windows-Frontend.git
-    cd Strive-Windows-Frontend/web
+    cd Strive-Windows-Frontend
     ```
-    *(Note: The root folder might be named `Strive-Windows-Frontend` if you cloned directly, adjust `cd` command if needed)*
+    *(Adjust `cd` command based on your cloned folder name)*
 
-2.  **Install dependencies:**
+2.  **Navigate to the web directory:**
+    ```bash
+    cd web
+    ```
+
+3.  **Install dependencies:**
     ```bash
     npm install
     ```
+    *   **React 19 Note:** If you encounter `ERESOLVE` errors regarding peer dependencies (especially `react-day-picker`), try installing using the `--legacy-peer-deps` flag:
+        ```bash
+        npm install --legacy-peer-deps
+        ```
 
-3.  **Start the Development Server:**
+4.  **Start the Development Server:**
     ```bash
     npm run dev
     ```
-    The web app will be available at `http://localhost:5173` (or the next available port). Vite provides Hot Module Replacement (HMR) for a fast development experience.
+    The web app will be available at `http://localhost:5173` (or the next available port).
 
 ---
 
-### Setting Up the Android Application (Placeholder)
+### Android Application (Placeholder)
 
 *(Instructions will be added here once the Android part is developed.)*
-
-1.  **Open the Android Project in Android Studio:**
-    -   Launch Android Studio.
-    -   Select **File > Open...** and navigate to the `android` directory within the project.
-2.  **Build and Run:**
-    -   Use Android Studio's tools or Gradle commands.
 
 ---
 
 ## Git Workflow Guidelines
 
--   **Branching Strategy:** Use feature branches (e.g., `feature/user-profile`). Merge into `main` via Pull Requests.
--   **Commit Messages:** Write clear, concise commit messages (e.g., `feat: Add login form component`).
--   **Pull Requests:** Use PRs for code review before merging to `main`.
--   **Environment Files:** The Vite `.gitignore` in `web/` ignores `.env` files. Use `.env.example` if you need to document environment variables. Do not commit secrets.
+-   **Branching Strategy:** Use feature branches (e.g., `feature/user-profile`). Merge into `main` via Pull Requests (if collaborating) or directly (if solo).
+-   **Commit Messages:** Write clear, concise commit messages.
+-   **Environment Files:** Use `.env` files (ignored by default in `web/.gitignore`) for environment variables. Use `.env.example` to document required variables. **Do not commit secrets.**
 
 ---
 
-## Development Roadmap (Initial Ideas)
+## Development Roadmap
 
--   **Web UI Completion:** Finalize static versions and basic interactivity for key screens using Shadcn/ui components.
--   **Android UI Setup:** Initialize the Android project structure and implement basic screens.
--   **Shared Logic/State:** Explore options for sharing logic if applicable (not a primary goal initially).
--   **Backend Integration (Future):** Connect to backend services once UI is mature.
+-   **Web MVP UI Complete:** Foundational UI and navigation for key screens are implemented.
+-   **Next Steps (Web):**
+    *   Implement Workout Creation/Tracking UI & Timers.
+    *   Integrate Recharts for visualizations on the Stats page.
+    *   Replace dummy data and logic with actual state management and placeholder API calls.
+    *   Implement form validation (e.g., `react-hook-form` + `zod`).
+    *   Implement full i18n using `i18next`.
+    *   Backend Integration (Future).
+-   **Android UI Setup:** Initialize the Android project structure and implement basic screens (Future).
+-   **Shared Logic/State:** Explore options for sharing logic (Future).
