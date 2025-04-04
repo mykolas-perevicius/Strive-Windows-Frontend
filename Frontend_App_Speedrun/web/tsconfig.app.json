@@ -1,3 +1,4 @@
+// tsconfig.app.json
 {
   "compilerOptions": {
     "composite": true,
@@ -13,8 +14,8 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
-    "jsx": "react-jsx",    
+    // "noEmit": true, // <-- REMOVE this line
+    "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
       "@/*": [

@@ -1,5 +1,5 @@
 // src/App.tsx
-import { Routes, Route, Navigate } from 'react-router-dom'; // Import Navigate
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 // --- Page Imports ---
 import LandingPage from '@/pages/LandingPage';
@@ -9,15 +9,16 @@ import CreateProfilePage from '@/pages/CreateProfilePage';
 
 // Layouts
 import { MainLayout } from '@/components/layout/MainLayout';
-import { SettingsLayout } from '@/components/layout/SettingsLayout'; // Import SettingsLayout
+import { SettingsLayout } from '@/components/layout/SettingsLayout';
 
 // App Pages
 import ProfilePage from '@/pages/app/ProfilePage';
-import PlaceholderPage from '@/pages/app/PlaceholderPage'; // Main placeholder
+import PlaceholderPage from '@/pages/app/PlaceholderPage';
 import PersonalRecordsPage from '@/pages/app/PersonalRecordsPage';
 
-// Settings Pages (Paths should now match file locations)
+// Settings Pages
 import SettingsAccountPage from '@/pages/app/settings/SettingsAccountPage';
+import SettingsAppearancePage from '@/pages/app/settings/SettingsAppearancePage'; // <-- Import Appearance Settings
 import SettingsPlaceholderPage from '@/pages/app/settings/SettingsPlaceholderPage';
 
 // --- Not Found Page (Optional) ---
@@ -34,7 +35,6 @@ function App() {
 
       {/* --- Authenticated Routes (within MainLayout) --- */}
       <Route element={<MainLayout />}>
-        {/* Redirect /dashboard to /profile */}
         <Route path="/dashboard" element={<Navigate to="/profile" replace />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/workouts" element={<PlaceholderPage />} />
@@ -47,10 +47,9 @@ function App() {
 
       {/* --- Settings Routes (within SettingsLayout) --- */}
       <Route path="/settings" element={<SettingsLayout />}>
-          {/* Default settings route redirects to account */}
           <Route index element={<Navigate to="/settings/account" replace />} />
           <Route path="account" element={<SettingsAccountPage />} />
-          <Route path="appearance" element={<SettingsPlaceholderPage />} />
+          <Route path="appearance" element={<SettingsAppearancePage />} /> {/* <-- Use new component */}
           <Route path="subscription" element={<SettingsPlaceholderPage />} />
           <Route path="language" element={<SettingsPlaceholderPage />} />
           <Route path="contact" element={<SettingsPlaceholderPage />} />
