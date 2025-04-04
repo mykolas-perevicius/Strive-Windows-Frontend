@@ -34,48 +34,55 @@ export function SettingsSubscriptionPage() {
           Manage your subscription details and billing information.
         </p>
 
-        {/* Display cards side-by-side on larger screens */}
-        <div className="grid gap-6 sm:grid-cols-2">
-          {/* Basic Plan Card (Always show, indicate if active) */}
-          <Card className={userSubscription.plan === 'Basic' ? 'border-primary' : ''}>
-            <CardHeader>
-              <CardTitle>Basic Plan</CardTitle>
-              <CardDescription>For individuals getting started.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <p className="text-3xl font-bold">Free</p>
-              <ul className="space-y-1 text-sm text-muted-foreground">
-                  <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-green-500" /> Basic Workout Tracking</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-green-500" /> Limited History</li>
-              </ul>
-            </CardContent>
+        {/* Use grid, ensure cards can stretch vertically */}
+        <div className="grid gap-6 sm:grid-cols-2 items-stretch"> {/* Added items-stretch */}
+          {/* Basic Plan Card */}
+          {/* Added flex, flex-col, and justify-between to make footer stick to bottom */}
+          <Card className={`flex flex-col justify-between ${userSubscription.plan === 'Basic' ? 'border-primary' : ''}`}>
+            <div> {/* Wrap Header and Content */}
+                <CardHeader>
+                  <CardTitle>Basic Plan</CardTitle>
+                  <CardDescription>For individuals getting started.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  <p className="text-3xl font-bold">Free</p>
+                  <ul className="space-y-1 text-sm text-muted-foreground">
+                      <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-green-500 flex-shrink-0" /> <span>Basic Workout Tracking</span></li> {/* Added flex-shrink-0 to icon */}
+                      <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-green-500 flex-shrink-0" /> <span>Limited History</span></li> {/* Added flex-shrink-0 to icon */}
+                  </ul>
+                </CardContent>
+            </div>
             <CardFooter>
               {userSubscription.plan === 'Basic' ? (
                 <Button className="w-full" variant="outline" disabled>
                   Current Plan
                 </Button>
               ) : (
-                <Button className="w-full" variant="outline" onClick={handleManageSubscription}>
-                  Downgrade
-                </Button>
+                 // This button wouldn't typically appear if user is premium, but included for structure
+                 <Button className="w-full" variant="outline" onClick={handleManageSubscription}>
+                   Downgrade to Basic (Example)
+                 </Button>
               )}
             </CardFooter>
           </Card>
 
-          {/* Premium Plan Card (Always show, indicate if active or offer upgrade) */}
-           <Card className={userSubscription.plan === 'Premium' ? 'border-primary' : ''}>
-            <CardHeader>
-              <CardTitle>Premium Plan</CardTitle>
-              <CardDescription>Unlock advanced features and insights.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <p className="text-3xl font-bold">$X.XX <span className="text-sm font-normal text-muted-foreground">/ month</span></p>
-               <ul className="space-y-1 text-sm text-muted-foreground">
-                  <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-green-500" /> Advanced Analytics</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-green-500" /> Unlimited History</li>
-                  <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-green-500" /> Priority Support</li>
-              </ul>
-            </CardContent>
+          {/* Premium Plan Card */}
+           {/* Added flex, flex-col, and justify-between */}
+           <Card className={`flex flex-col justify-between ${userSubscription.plan === 'Premium' ? 'border-primary' : ''}`}>
+             <div> {/* Wrap Header and Content */}
+                <CardHeader>
+                  <CardTitle>Premium Plan</CardTitle>
+                  <CardDescription>Unlock advanced features and insights.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  <p className="text-3xl font-bold">$X.XX <span className="text-sm font-normal text-muted-foreground">/ month</span></p>
+                   <ul className="space-y-1 text-sm text-muted-foreground">
+                      <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-green-500 flex-shrink-0" /> <span>Advanced Analytics</span></li> {/* Added flex-shrink-0 */}
+                      <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-green-500 flex-shrink-0" /> <span>Unlimited History</span></li> {/* Added flex-shrink-0 */}
+                      <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-green-500 flex-shrink-0" /> <span>Priority Support</span></li> {/* Added flex-shrink-0 */}
+                  </ul>
+                </CardContent>
+            </div>
             <CardFooter>
               {userSubscription.plan === 'Premium' ? (
                  <Button className="w-full" variant="outline" onClick={handleManageSubscription}>

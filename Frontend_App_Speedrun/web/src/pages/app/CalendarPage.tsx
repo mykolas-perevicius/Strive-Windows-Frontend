@@ -1,77 +1,96 @@
-import React from 'react'; // Import React for useState
+// src/pages/app/CalendarPage.tsx
+import React from 'react';
 import { Calendar } from "@/components/ui/calendar";
-import { Card, CardContent } from "@/components/ui/card"; // Use Card for optional details
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+// import { Button } from '@/components/ui/button'; // <-- REMOVE THIS LINE
+import { format } from 'date-fns';
 
 // Dummy data for days with workouts - replace with actual data fetching
-// Use Date objects for comparison with react-day-picker
-const workoutDays = [
-  new Date(2024, 0, 16), // Jan 16 2024 (Month is 0-indexed)
-  new Date(2024, 0, 15), // Jan 15 2024
-  new Date(2024, 0, 14), // Jan 14 2024
-  new Date(2024, 0, 8),  // Jan 8 2024
-  new Date(2024, 1, 1),   // Feb 1 2024
-  // Add more dates...
-];
+const workoutLog: Record<string, { workoutName: string; id: string }[]> = {
+  '2025-04-01': [{ workoutName: "Push Day", id: "w1" }],
+  '2025-04-03': [{ workoutName: "Pull Day", id: "w2" }, { workoutName: "Quick Abs", id: "w3"}],
+  '2025-03-28': [{ workoutName: "Leg Day", id: "w4" }],
+};
+
+// Generate Date objects for calendar modifier
+const workoutDays = Object.keys(workoutLog).map(dateStr => {
+    const [year, month, day] = dateStr.split('-').map(Number);
+    return new Date(year, month - 1, day); // Month is 0-indexed
+});
+
 
 export function CalendarPage() {
-  const [date, setDate] = React.useState<Date | undefined>(new Date()); // State for selected date
-  const [currentMonth, setCurrentMonth] = React.useState<Date>(new Date()); // State for displayed month
+  const [selectedDate, setSelectedDate] = React.useState<Date | undefined>(new Date());
+  const [currentMonth, setCurrentMonth] = React.useState<Date>(new Date());
 
-  // Find workout details for the selected date (dummy example)
-  const selectedWorkoutDetails = date && workoutDays.some(
-    workoutDay => workoutDay.toDateString() === date.toDateString()
-  ) ? `Workout logged on ${date.toLocaleDateString()}` : null; // Replace with actual data lookup
+  const selectedDateString = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '';
+  const workoutsForSelectedDate = workoutLog[selectedDateString] || [];
 
   return (
-    <div className="container mx-auto max-w-4xl p-4 space-y-6">
-       <h1 className="text-2xl font-bold border-b pb-2">Workout Calendar</h1>
-
-       <div className="flex flex-col items-center gap-6 md:flex-row md:items-start">
-          {/* Calendar Component */}
-          <Card className="w-full md:w-auto"> {/* Allows calendar to take available width */}
+    <div className="container mx-auto max-w-5xl p-4 md:p-6 space-y-6">
+       <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Workout Calendar</h1>
+       <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 gap-6">
+          <Card className="lg:col-span-2">
              <Calendar
-               mode="single" // Allows selecting one day
-               selected={date} // Bind selected state
-               onSelect={setDate} // Update state on selection
-               month={currentMonth} // Control displayed month
-               onMonthChange={setCurrentMonth} // Update month state
-               className="p-0" // Remove default padding if inside Card
-               // Modifiers to style workout days
+               mode="single"
+               selected={selectedDate}
+               onSelect={setSelectedDate}
+               month={currentMonth}
+               onMonthChange={setCurrentMonth}
+               className="p-3 sm:p-4"
                modifiers={{
-                 workout: workoutDays, // Apply 'workout' modifier to dates in workoutDays array
+                 workout: workoutDays,
+                 selectedWorkout: (date) => {
+                    return workoutDays.some(wd => wd.toDateString() === date.toDateString()) &&
+                           selectedDate?.toDateString() === date.toDateString();
+                 }
                }}
                modifiersClassNames={{
-                 workout: 'bg-primary/20 text-primary-foreground rounded-md', // Style for days with workouts
-                 // Example: Different style for today
-                 // today: 'bg-accent text-accent-foreground rounded-full',
+                 workout: 'border border-primary/50 rounded-md',
+                 selectedWorkout: 'bg-primary text-primary-foreground',
+                 today: 'bg-muted text-foreground rounded-full',
                }}
-               // Optional: Add footer or captions
-               // showOutsideDays={false} // Hide days from other months
+               showOutsideDays={false}
              />
+             <div className="p-4 border-t text-xs text-muted-foreground flex items-center gap-4">
+                 <span>Legend:</span>
+                 <span className='flex items-center gap-1.5'><span className='inline-block w-3 h-3 rounded-full bg-muted'></span>Today</span>
+                 <span className='flex items-center gap-1.5'><span className='inline-block w-3 h-3 border border-primary/50 rounded'></span>Workout Logged</span>
+             </div>
           </Card>
 
-          {/* Details Area (Optional) */}
-          <div className="flex-1 w-full">
-             <h2 className="text-lg font-semibold mb-2">Selected Date Details</h2>
-             {date ? (
-                <Card>
-                   <CardContent className="p-4">
-                      <p className="font-medium mb-1">{date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                      {selectedWorkoutDetails ? (
-                         <p className="text-sm text-muted-foreground">{selectedWorkoutDetails}</p>
-                      ) : (
-                          <p className="text-sm text-muted-foreground">No workout logged on this day.</p>
-                      )}
-                      {/* Add button to view workout or log new one for this date? */}
-                      {/* <Button size="sm" variant="outline" className="mt-4">View Workout</Button> */}
-                   </CardContent>
-                </Card>
-             ) : (
-                <p className="text-sm text-muted-foreground">Select a date to see details.</p>
-             )}
+          <div className="lg:col-span-1">
+             <Card className="min-h-[200px]">
+                <CardHeader>
+                    <CardTitle>
+                       {selectedDate ? format(selectedDate, 'EEEE, MMMM d, yyyy') : 'Select a Date'}
+                    </CardTitle>
+                    <CardDescription>
+                        {selectedDate ? "Workouts logged on this day:" : "Click a date on the calendar."}
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    {selectedDate ? (
+                        workoutsForSelectedDate.length > 0 ? (
+                            <ul className="space-y-2">
+                                {workoutsForSelectedDate.map(workout => (
+                                    <li key={workout.id} className="text-sm p-2 bg-muted/50 rounded-md hover:bg-muted transition-colors">
+                                        <button onClick={() => console.log("Navigate to workout:", workout.id)} className="w-full text-left">
+                                            {workout.workoutName}
+                                        </button>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p className="text-sm text-muted-foreground italic">No workouts logged.</p>
+                        )
+                    ) : (
+                        <p className="text-sm text-muted-foreground">Details will appear here.</p>
+                    )}
+                </CardContent>
+             </Card>
           </div>
        </div>
-
     </div>
   );
 }
