@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     
-    "composite": true,
     "declaration": true,
+    "composite": true,
 
     // Existing options:
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
@@ -16,7 +16,7 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true, // Keep this as true
+    // "noEmit": true, // Keep this as true
 
     /* Linting */
     "strict": true,

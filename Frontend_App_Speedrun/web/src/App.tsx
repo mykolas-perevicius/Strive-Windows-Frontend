@@ -1,20 +1,32 @@
-// Remove the default Vite logos and CSS import if you want a clean slate
-// import viteLogo from '/vite.svg'
-// import './App.css' // Remove this if you cleared App.css content
+import { Routes, Route } from 'react-router-dom';
+import LandingPage from '@/pages/LandingPage';
+import LoginPage from '@/pages/LoginPage';
+import RegisterPage from '@/pages/RegisterPage';
+import CreateProfilePage from '@/pages/CreateProfilePage'; // <-- Import CreateProfilePage
 
-import { Button } from "@/components/ui/button" // Import the Shadcn button
-
-function App() {
-  // Replace the default content with this
-  return (
-    <div className="flex flex-col items-center justify-center min-h-svh bg-background text-foreground p-4">
-      <h1 className="text-2xl font-bold mb-4">Frontend App Speedrun</h1>
-      <p className="mb-6">Vite + React + TypeScript + Tailwind v4 + Shadcn/ui</p>
-      <Button variant="destructive" size="lg">
-        Click Me!
-      </Button>
-    </div>
-  )
+// Placeholder Dashboard component
+function DashboardPlaceholder() {
+  return <div className="flex min-h-screen items-center justify-center"><h1 className="text-3xl">Dashboard</h1><p>(Placeholder)</p></div>;
 }
 
-export default App
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/create-profile" element={<CreateProfilePage />} /> {/* <-- Add Create Profile Route */}
+
+      {/* Placeholder route for where the app goes after login/profile creation */}
+      <Route path="/dashboard" element={<DashboardPlaceholder />} />
+
+      {/* Add other routes here later */}
+      {/* <Route path="/forgot-password" element={<ForgotPasswordPage />} /> */}
+
+      {/* Optional: Add a catch-all route for 404 Not Found */}
+      {/* <Route path="*" element={<NotFoundPage />} /> */}
+    </Routes>
+  );
+}
+
+export default App;
