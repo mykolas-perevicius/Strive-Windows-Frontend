@@ -15,15 +15,19 @@ import { SettingsLayout } from '@/components/layout/SettingsLayout';
 import ProfilePage from '@/pages/app/ProfilePage';
 import PlaceholderPage from '@/pages/app/PlaceholderPage';
 import PersonalRecordsPage from '@/pages/app/PersonalRecordsPage';
+import StartWorkoutPage from '@/pages/app/StartWorkoutPage'; // <-- Correct Import
 
 // Settings Pages
 import SettingsAccountPage from '@/pages/app/settings/SettingsAccountPage';
-import SettingsAppearancePage from '@/pages/app/settings/SettingsAppearancePage'; // <-- Import Appearance Settings
-import SettingsPlaceholderPage from '@/pages/app/settings/SettingsPlaceholderPage';
+import SettingsAppearancePage from '@/pages/app/settings/SettingsAppearancePage';
+import SettingsSubscriptionPage from '@/pages/app/settings/SettingsSubscriptionPage';
+import SettingsLanguagePage from '@/pages/app/settings/SettingsLanguagePage';
+import SettingsContactPage from '@/pages/app/settings/SettingsContactPage';
 
 // --- Not Found Page (Optional) ---
 // import NotFoundPage from '@/pages/NotFoundPage';
 
+// --- App Component ---
 function App() {
   return (
     <Routes>
@@ -37,10 +41,10 @@ function App() {
       <Route element={<MainLayout />}>
         <Route path="/dashboard" element={<Navigate to="/profile" replace />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/workouts" element={<PlaceholderPage />} />
-        <Route path="/start-workout" element={<PlaceholderPage />} />
-        <Route path="/calendar" element={<PlaceholderPage />} />
-        <Route path="/stats" element={<PlaceholderPage />} />
+        <Route path="/workouts" element={<PlaceholderPage />} /> {/* Will replace this next */}
+        <Route path="/start-workout" element={<StartWorkoutPage />} /> {/* Use imported component */}
+        <Route path="/calendar" element={<PlaceholderPage />} /> {/* Will replace this later */}
+        <Route path="/stats" element={<PlaceholderPage />} /> {/* Will replace this later */}
         <Route path="/personal-records" element={<PersonalRecordsPage />} />
       </Route> {/* End of routes within MainLayout */}
 
@@ -49,10 +53,10 @@ function App() {
       <Route path="/settings" element={<SettingsLayout />}>
           <Route index element={<Navigate to="/settings/account" replace />} />
           <Route path="account" element={<SettingsAccountPage />} />
-          <Route path="appearance" element={<SettingsAppearancePage />} /> {/* <-- Use new component */}
-          <Route path="subscription" element={<SettingsPlaceholderPage />} />
-          <Route path="language" element={<SettingsPlaceholderPage />} />
-          <Route path="contact" element={<SettingsPlaceholderPage />} />
+          <Route path="appearance" element={<SettingsAppearancePage />} />
+          <Route path="subscription" element={<SettingsSubscriptionPage />} />
+          <Route path="language" element={<SettingsLanguagePage />} />
+          <Route path="contact" element={<SettingsContactPage />} />
       </Route> {/* End of routes within SettingsLayout */}
 
 
@@ -63,4 +67,5 @@ function App() {
   );
 }
 
+// --- Single Default Export ---
 export default App;

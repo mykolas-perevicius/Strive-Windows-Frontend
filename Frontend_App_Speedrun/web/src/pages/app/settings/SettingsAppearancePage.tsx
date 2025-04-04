@@ -3,12 +3,13 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 
-// Import the actual useTheme hook from the correct location
-import { useTheme } from "@/components/contexts/ThemeProvider"; // <-- Corrected path alias
+// Import the renamed hook
+import { useAppSettings } from "@/hooks/useAppSettings"; // <-- Update path/name
 import { Sun, Moon, Laptop } from "lucide-react";
 
 export function SettingsAppearancePage() {
-  const { theme, setTheme } = useTheme();
+  // Use the renamed hook
+  const { theme, setTheme } = useAppSettings(); // Only need theme parts here
 
   return (
     <div className="space-y-8">

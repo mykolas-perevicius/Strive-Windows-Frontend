@@ -1,33 +1,65 @@
 // src/components/settings/SettingsNav.tsx
-import { NavLink } from "react-router-dom"; // Use NavLink for active styling
+import { NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useAppSettings } from "@/hooks/useAppSettings";
 import {
-  UserCog,     // Account
-  Palette,     // Appearance
-  CreditCard,  // Subscription
-  Languages,   // Language
-  Mail,        // Contact Us
-  LogOut,      // Logout
+  UserCog, Palette, CreditCard, Languages, Mail, LogOut,
 } from "lucide-react";
 
+// --- Data and Types ---
 const settingsNavItems = [
-  { href: "/settings/account", label: "Account", icon: UserCog },
-  { href: "/settings/appearance", label: "Appearance", icon: Palette },
-  { href: "/settings/subscription", label: "Subscription", icon: CreditCard },
-  { href: "/settings/language", label: "Language", icon: Languages },
-  { href: "/settings/contact", label: "Contact Us", icon: Mail },
+  { href: "/settings/account", label: "Account", icon: UserCog, tKey: 'account' },
+  { href: "/settings/appearance", label: "Appearance", icon: Palette, tKey: 'appearance' },
+  { href: "/settings/subscription", label: "Subscription", icon: CreditCard, tKey: 'subscription' },
+  { href: "/settings/language", label: "Language", icon: Languages, tKey: 'language' },
+  { href: "/settings/contact", label: "Contact Us", icon: Mail, tKey: 'contact' },
 ];
 
-// Removed unused class name variables:
-// const activeClassName = "bg-muted hover:bg-muted text-primary";
-// const inactiveClassName = "hover:bg-transparent hover:underline";
+// Type for translation keys
+type TranslationKey = 'account' | 'appearance' | 'subscription' | 'language' | 'contact' | 'logout';
+
+// Type for the translations object
+type Translations = {
+  [lang in 'en' | 'es']: { // Use specific language codes
+    [key in TranslationKey]: string;
+  };
+};
+
+const translations: Translations = {
+  en: {
+    account: 'Account',
+    appearance: 'Appearance',
+    subscription: 'Subscription',
+    language: 'Language',
+    contact: 'Contact Us',
+    logout: 'Logout',
+  },
+  es: {
+    account: 'Cuenta',
+    appearance: 'Apariencia',
+    subscription: 'Suscripción',
+    language: 'Idioma',
+    contact: 'Contacto',
+    logout: 'Cerrar sesión',
+  },
+};
+// --- End Data and Types ---
+
 
 export function SettingsNav() {
+  const { language } = useAppSettings();
 
   const handleLogout = () => {
     console.log("Logout clicked - Implement actual logout");
-    // navigate('/login');
+  };
+
+  // Helper function with refined typing
+  const t = (key: TranslationKey): string => {
+    // Determine the language key, defaulting to 'en' if the current language isn't in our translations
+    const langKey: keyof Translations = language in translations ? language : 'en';
+    // Get the translation for the determined language and key, fallback to English, then the key itself
+    return translations[langKey]?.[key] ?? translations['en']?.[key] ?? key;
   };
 
   return (
@@ -46,7 +78,7 @@ export function SettingsNav() {
           end
         >
           <item.icon className="mr-2 h-4 w-4" />
-          <span>{item.label}</span>
+          <span>{t(item.tKey as TranslationKey)}</span> {/* Cast tKey for safety */}
         </NavLink>
       ))}
 
@@ -57,7 +89,7 @@ export function SettingsNav() {
         onClick={handleLogout}
       >
         <LogOut className="mr-2 h-4 w-4" />
-        <span>Logout</span>
+        <span>{t('logout')}</span>
       </Button>
     </nav>
   );
