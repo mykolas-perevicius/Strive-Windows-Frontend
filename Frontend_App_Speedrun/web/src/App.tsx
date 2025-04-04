@@ -13,9 +13,12 @@ import { SettingsLayout } from '@/components/layout/SettingsLayout';
 
 // App Pages
 import ProfilePage from '@/pages/app/ProfilePage';
-import PlaceholderPage from '@/pages/app/PlaceholderPage';
+// import PlaceholderPage from '@/pages/app/PlaceholderPage'; // Can remove import
 import PersonalRecordsPage from '@/pages/app/PersonalRecordsPage';
-import StartWorkoutPage from '@/pages/app/StartWorkoutPage'; // <-- Correct Import
+import StartWorkoutPage from '@/pages/app/StartWorkoutPage';
+import WorkoutsPage from '@/pages/app/WorkoutsPage';
+import CalendarPage from '@/pages/app/CalendarPage';
+import StatsPage from '@/pages/app/StatsPage'; // <-- Import StatsPage
 
 // Settings Pages
 import SettingsAccountPage from '@/pages/app/settings/SettingsAccountPage';
@@ -27,7 +30,6 @@ import SettingsContactPage from '@/pages/app/settings/SettingsContactPage';
 // --- Not Found Page (Optional) ---
 // import NotFoundPage from '@/pages/NotFoundPage';
 
-// --- App Component ---
 function App() {
   return (
     <Routes>
@@ -41,10 +43,10 @@ function App() {
       <Route element={<MainLayout />}>
         <Route path="/dashboard" element={<Navigate to="/profile" replace />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/workouts" element={<PlaceholderPage />} /> {/* Will replace this next */}
-        <Route path="/start-workout" element={<StartWorkoutPage />} /> {/* Use imported component */}
-        <Route path="/calendar" element={<PlaceholderPage />} /> {/* Will replace this later */}
-        <Route path="/stats" element={<PlaceholderPage />} /> {/* Will replace this later */}
+        <Route path="/workouts" element={<WorkoutsPage />} />
+        <Route path="/start-workout" element={<StartWorkoutPage />} />
+        <Route path="/calendar" element={<CalendarPage />} />
+        <Route path="/stats" element={<StatsPage />} /> {/* <-- Use new component */}
         <Route path="/personal-records" element={<PersonalRecordsPage />} />
       </Route> {/* End of routes within MainLayout */}
 
@@ -67,5 +69,4 @@ function App() {
   );
 }
 
-// --- Single Default Export ---
 export default App;

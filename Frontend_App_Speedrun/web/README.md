@@ -1,54 +1,109 @@
-# React + TypeScript + Vite
+# Frontend_App_Speedrun (Web Prototype - Strive App)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is the web frontend prototype for a fitness tracking application, tentatively named "Strive" (based on initial designs). It's being developed iteratively as part of the `Frontend_App_Speedrun` initiative.
 
-Currently, two official plugins are available:
+## Current Status: Minimal Viable Prototype (MVP)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This prototype currently includes the foundational UI and navigation flow for key application areas.
 
-## Expanding the ESLint configuration
+*   **Functionality:** Core navigation, basic form handling (login, register, profile creation), theme switching, and demo language switching (for settings navigation) are implemented. Most data displayed is **dummy data**.
+*   **UI:** Built using Shadcn/ui components with the specified theme (New York style, Gray base color). Layouts are responsive.
+*   **Backend:** **No backend integration** exists yet. All actions (login, register, save profile, etc.) currently simulate success and log to the console or navigate accordingly.
+*   **Core Logic:** Workout tracking timers, detailed stats calculations, and template application logic are **not yet implemented**.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+*   **Framework/Library:** React 19
+*   **Language:** TypeScript
+*   **Build Tool:** Vite
+*   **Styling:** Tailwind CSS v4 (via `@tailwindcss/vite`)
+*   **Component Library:** Shadcn/ui
+    *   Style: New York
+    *   Base Color: Gray
+    *   Mode: CSS Variables
+*   **Routing:** React Router DOM v6
+*   **Icons:** Lucide React
+*   **State Management (Implicit):** React Context (for Theme/Language)
+*   **Persistence:** `localStorage` (for theme/language preference)
+*   **Charting (Installed):** Recharts (integration pending)
+*   **Code Quality:** ESLint, Prettier (based on standard Vite setup)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Project Structure (`web/src/`)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+*   `components/`: Contains Shadcn `ui` components, shared `layout` components (BottomNav, MainLayout, SettingsLayout), and specific `settings` components (SettingsNav).
+*   `contexts/`: Holds React context providers (e.g., `AppSettingsProvider`).
+*   `hooks/`: Custom hooks (e.g., `useAppSettings`).
+*   `lib/`: Utility functions (e.g., Shadcn's `cn`).
+*   `pages/`: Page-level components, organized into:
+    *   `app/`: Authenticated application screens (Profile, Workouts, Calendar, Stats, etc.).
+        *   `settings/`: Specific settings pages (Account, Appearance, etc.).
+    *   Auth/Public pages (LandingPage, LoginPage, etc.).
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Getting Started
+
+### Prerequisites
+
+*   Node.js (v22+ recommended)
+*   npm (v11+ recommended)
+*   Developed natively on Windows (should not affect standard commands but provided for context).
+
+### Installation
+
+1.  Navigate to the web project directory:
+    ```bash
+    cd Frontend_App_Speedrun/web
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+    *   **Note (React 19):** Due to ongoing ecosystem updates for React 19, some peer dependencies (especially related to `react-day-picker` used by Shadcn's Calendar) might cause conflicts during installation. If you encounter `ERESOLVE` errors, try installing with the `--legacy-peer-deps` flag (as was necessary during development for certain packages like `recharts`):
+        ```bash
+        npm install --legacy-peer-deps
+        ```
+
+### Running the Development Server
+
+1.  Start the Vite dev server:
+    ```bash
+    npm run dev
+    ```
+2.  Open your browser and navigate to the local URL provided (usually `http://localhost:5173`).
+
+## Implemented Features (MVP)
+
+*   **Authentication Flow:**
+    *   Landing Page (Login/Register options)
+    *   Login Page (dummy submit -> navigates to dashboard)
+    *   Registration Page (dummy validation & submit -> navigates to profile creation)
+    *   Create Profile Page (dummy submit/skip -> navigates to dashboard)
+*   **Main Application Layout:**
+    *   Persistent Bottom Navigation for authenticated sections.
+    *   Main content area rendering routed pages.
+*   **Core App Screens:**
+    *   Profile Screen: Displays basic user info (dummy), links to Settings & Personal Records.
+    *   Personal Records Screen: Displays PRs in a table (dummy data).
+    *   Start Workout Screen: Options for blank workout or selecting from Barbell/Bodyweight templates (dummy data, navigation placeholders).
+    *   Workouts Screen: Displays workout history log grouped by date (dummy data).
+    *   Calendar Screen: Monthly view highlighting workout days (dummy data), basic date selection.
+    *   Stats Screen: Time range selection, progress bar summaries, exercise progression list (dummy data), chart placeholders.
+*   **Settings:**
+    *   Dedicated Settings Layout with sidebar navigation.
+    *   Account Settings Page (UI complete, actions are dummies).
+    *   Appearance Settings Page (Theme selection: Light/Dark/System, functional).
+    *   Subscription Settings Page (UI complete, shows dummy plans).
+    *   Language Settings Page (UI complete, demo language switching EN/ES for Settings Nav text).
+    *   Contact Us Page (Displays dummy contact info).
+    *   Logout button (dummy action).
+*   **General:**
+    *   Functional Dark Mode (Light/Dark/System) persisted in localStorage.
+    *   Basic responsive design.
+
+## Next Steps
+
+*   Implement Workout Creation/Tracking UI & Timers.
+*   Integrate Recharts for visualizations on the Stats page.
+*   Replace dummy data and logic with actual state management and API calls.
+*   Refine UI/UX based on further testing and feedback.
+*   Add form validation using a library (e.g., `react-hook-form` with `zod`).
+*   Implement actual i18n using `i18next`.
