@@ -101,6 +101,13 @@ Below is an overview of the repository's directory layout:
     ```
     This should show v22.x.x or at least > v16.x.x
 
+5.  **Development Tips:**
+    * Use Chrome DevTools (F12) for debugging and component inspection
+    * Enable "Toggle device toolbar" (Ctrl+Shift+M) to test responsive design
+    * Check the console (F12 > Console) for any errors or warnings
+    * Use the React Developer Tools browser extension for component debugging
+
+
 ---
 
 ### Android Application (Placeholder)
