@@ -12,16 +12,30 @@ const availableLanguages = [
     { code: 'es', name: 'Español', flag: '🇪🇸' },
 ];
 
+const translations = {
+  en: {
+    title: "Language",
+    subtitle: "Select Language",
+    description: "Choose the language displayed in the application.",
+  },
+  es: {
+    title: "Idioma",
+    subtitle: "Seleccionar idioma",
+    description: "Elige el idioma que se muestra en la aplicación.",
+  },
+};
+
 export function SettingsLanguagePage() {
   // Use the real hook
   const { language, setLanguage } = useAppSettings(); // Use language parts here
+  const t = translations[language]; // Get translations based on current language
 
   return (
     <div className="space-y-8">
-      <h1 className="text-2xl font-bold">Language</h1>
+      <h1 className="text-2xl font-bold">{t.title}</h1>
       <section className="space-y-4">
-        <h2 className="text-lg font-semibold">Select Language</h2>
-        <p className="text-sm text-muted-foreground"> Choose the language displayed in the application. </p>
+        <h2 className="text-lg font-semibold">{t.subtitle}</h2>
+        <p className="text-sm text-muted-foreground">{t.description}</p>
         <RadioGroup
           value={language}
           // Ensure the type matches the Language type in the context
