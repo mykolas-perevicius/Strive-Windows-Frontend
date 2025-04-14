@@ -1,11 +1,10 @@
 // src/pages/app/StatsPage.tsx
 
-import React from 'react';
+import React, { useState, useEffect } from 'react'; // Import useState and useEffect
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
-// Assuming dummyStats exports these now
 import { workoutFrequencyData, workoutVolumeData, weightProgressData } from "@/data/dummyStats";
 import {
   ResponsiveContainer,
@@ -22,15 +21,13 @@ import {
 import { ValueType, NameType } from 'recharts/types/component/DefaultTooltipContent';
 import { ArrowUp, ArrowDown, Minus } from 'lucide-react';
 
+// --- Define types ---
 type TimeRange = "week" | "month" | "year";
-
-// --- Define types based on expected dummy data ---
 type WeightPoint = { date: string; weight: number };
 type FrequencyPoint = { week: string; workouts: number };
 type VolumePoint = { date: string; volume: number };
 type ChartDataPoint = WeightPoint | FrequencyPoint | VolumePoint;
 
-// Define type for Summary Stats Data
 interface SummaryStats {
     completionPercent: number;
     skippedPercent: number;
@@ -43,28 +40,29 @@ interface SummaryStats {
     }[];
 }
 
-// *** REINSTATED DUMMY FUNCTION DEFINITION LOCALLY ***
+interface TooltipPayloadEntry {
+    name: NameType;
+    value: ValueType;
+    color?: string; // Color passed from Line/Bar component
+    unit?: string;
+    payload: ChartDataPoint;
+}
+
+// --- Dummy Data Function ---
 const getSummaryStatsData = (range: TimeRange): SummaryStats => {
-  console.log(`(Local Dummy) Fetching summary stats for: ${range}`);
-  // Basic randomization for variety, replace with actual logic later
-  const baseCompletion = 70 + Math.floor(Math.random() * 25); // 70-94%
-  const baseSkipped = 2 + Math.floor(Math.random() * 6); // 2-7%
+  const baseCompletion = 70 + Math.floor(Math.random() * 25);
+  const baseSkipped = 2 + Math.floor(Math.random() * 6);
   const partial = 100 - baseCompletion - baseSkipped;
-  // Ensure percentages don't go negative if completion+skipped > 100
   const finalPartial = Math.max(0, partial);
   const finalCompletion = 100 - baseSkipped - finalPartial;
-
-  // Dummy progression data
   const progression = [
       { id: 'ex1', name: 'Bench Press', change: "+5 lbs", trend: 'up' as const },
       { id: 'ex2', name: 'Squat', change: "+10 lbs", trend: 'up' as const },
       { id: 'ex3', name: 'Tricep Extension', change: "-1.5 lbs", trend: 'down' as const },
       { id: 'ex4', name: 'Deadlift', change: "No Change", trend: 'same' as const },
     ];
-   // Simple shuffle for variety based on range (example only)
    if (range === 'week') progression.pop();
    if (range === 'year') progression.shift();
-
 
   return {
     completionPercent: finalCompletion,
@@ -73,49 +71,38 @@ const getSummaryStatsData = (range: TimeRange): SummaryStats => {
     exerciseProgression: progression,
   };
 };
-// --- End Dummy Function ---
 
-
-// --- Define a more specific type for the tooltip payload entry ---
-interface TooltipPayloadEntry {
-    name: NameType;
-    value: ValueType;
-    color?: string;
-    unit?: string;
-    payload: ChartDataPoint;
-}
-
-// --- Recharts Tooltip ---
+// --- Custom Tooltip Component ---
 const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
-  if (active && payload && payload.length) {
+   if (active && payload && payload.length) {
     const typedPayload = payload as TooltipPayloadEntry[];
-    const dataPoint = typedPayload[0].payload;
+    const dataPoint = typedPayload[0]?.payload;
 
-    // *** REMOVED UNUSED getLabelType function ***
-    // const getLabelType = (point: ChartDataPoint): string => { ... }
-
-    const getUnit = (point: ChartDataPoint): string | undefined => {
-        if ('weight' in point) return ' kg/lb';
+    const getUnit = (point: ChartDataPoint | undefined): string | undefined => {
+        if (!point) return undefined;
+        if ('weight' in point) return ' kg';
+        if ('volume' in point) return '';
+        if ('workouts' in point) return '';
         return undefined;
     }
 
+    const primaryEntry = typedPayload[0];
+    const primaryValue = primaryEntry?.value;
+    const primaryUnit = getUnit(dataPoint);
+    // Use the color passed from the Line/Bar component via the 'color' prop
+    const tooltipColor = primaryEntry?.color || 'hsl(var(--foreground))'; // Fallback to foreground
+
     return (
-      <div className="rounded-md border border-border bg-popover p-2 shadow-sm text-popover-foreground">
-        <div className="grid grid-cols-2 gap-x-2 gap-y-1">
-          <div className="flex flex-col col-span-2 mb-1">
-            {/* Display the label (e.g., date/week) */}
-            <span className="font-semibold">{label}</span>
-          </div>
-          {typedPayload.map((entry, index: number) => (
-             <div key={`item-${index}`} className="flex flex-col col-span-2 sm:col-span-1">
-                <span className="text-xs uppercase" style={{ color: entry.color }}>
-                    {entry.name}
-                </span>
-                <span className="font-semibold" style={{ color: entry.color }}>
-                    {entry.value}{getUnit(dataPoint) || ''}
-                </span>
-             </div>
-          ))}
+      <div className="rounded-lg border border-border/80 bg-background/90 p-2.5 shadow-lg backdrop-blur-sm">
+        <div className="mb-1.5 font-semibold text-foreground">{label}</div>
+        <div className="flex items-baseline space-x-1.5 text-sm">
+           <span className="font-medium" style={{ color: tooltipColor }}>
+             {primaryEntry?.name}:
+           </span>
+           <span className="font-semibold text-foreground">
+             {primaryValue !== undefined && primaryValue !== null ? primaryValue.toString() : 'N/A'}
+             {primaryUnit}
+           </span>
         </div>
       </div>
     );
@@ -124,9 +111,41 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameT
 };
 
 
+// --- Stats Page Component ---
 export function StatsPage() {
   const [selectedTimeRange, setSelectedTimeRange] = React.useState<TimeRange>("month");
+  // State to hold the computed primary color (using RGB this time)
+  const [computedPrimaryRgbColor, setComputedPrimaryRgbColor] = useState('rgb(0, 0, 0)'); // Default fallback (black)
   const summaryStatsData: SummaryStats = getSummaryStatsData(selectedTimeRange);
+
+  // Effect to get the computed primary color (as RGB) after mount
+  useEffect(() => {
+    // Temporary element to apply the CSS variable to
+    const tempElement = document.createElement('div');
+    // Apply the CSS variable inline - browser will compute it
+    tempElement.style.color = 'hsl(var(--primary))';
+    // Append to body briefly to allow computation
+    document.body.appendChild(tempElement);
+
+    try {
+        // Get the *computed* color style (likely in rgb format)
+        const computedColor = window.getComputedStyle(tempElement).color;
+        if (computedColor) {
+          setComputedPrimaryRgbColor(computedColor);
+          console.log("Computed Primary Color (RGB):", computedColor); // Log for debugging
+        } else {
+            console.warn("Could not compute color from --primary CSS variable.");
+            // Keep fallback (e.g., black or a theme-agnostic gray)
+            setComputedPrimaryRgbColor('rgb(50, 50, 50)'); // Dark gray fallback
+        }
+    } catch (error) {
+        console.error("Error computing primary color:", error);
+        setComputedPrimaryRgbColor('rgb(50, 50, 50)'); // Dark gray fallback
+    } finally {
+        // Clean up the temporary element
+        document.body.removeChild(tempElement);
+    }
+  }, []); // Empty dependency array ensures this runs once on mount
 
   const timeRangeOptions: { value: TimeRange; label: string }[] = [
     { value: "week", label: "Last Week" },
@@ -134,13 +153,10 @@ export function StatsPage() {
     { value: "year", label: "Last Year" },
   ];
 
-  // Define theme-aware colors
-  const axisStrokeColor = "hsl(var(--muted-foreground) / 0.6)";
-  const gridStrokeColor = "hsl(var(--border) / 0.6)";
-  const primaryColor = "hsl(var(--primary))";
-  // *** REMOVED UNUSED COLOR VARIABLES ***
-  // const destructiveColor = "hsl(var(--destructive))";
-  // const warningColor = "hsl(var(--warning))";
+  // Define theme-aware colors for axes/grids
+  const axisStrokeColor = "hsl(var(--muted-foreground) / 0.7)";
+  const gridStrokeColor = "hsl(var(--border) / 0.7)";
+  // linePrimaryColor now comes from state: computedPrimaryRgbColor
 
   // Helper for progression icons
   const TrendIcon = ({ trend }: { trend: 'up' | 'down' | 'same' }) => {
@@ -152,11 +168,35 @@ export function StatsPage() {
     }
   };
 
+  // Calculate explicit domains
+  const weightValues = weightProgressData.map(p => p.weight);
+  const minWeight = Math.min(...weightValues);
+  const maxWeight = Math.max(...weightValues);
+  const weightDomain: [number, number] = [Math.floor(minWeight * 0.98), Math.ceil(maxWeight * 1.02)];
+
+  const volumeValues = workoutVolumeData.map(p => p.volume);
+  const minVolume = Math.min(...volumeValues);
+  const maxVolume = Math.max(...volumeValues);
+  const volumeDomain: [number, number] = [Math.floor(minVolume * 0.98), Math.ceil(maxVolume * 1.02)];
+
+  // Define dot styles using the *computed* RGB color from state
+  const lineDotStyle = {
+    stroke: computedPrimaryRgbColor, // Use computed color for dot stroke
+    strokeWidth: 1,
+    r: 3,
+    fill: 'hsl(var(--background))' // Hollow effect adapting to theme background
+  };
+  const activeDotStyle = {
+    r: 5,
+    fill: computedPrimaryRgbColor, // Use computed color for active dot fill
+    strokeWidth: 0
+  };
+
 
   return (
     <div className="container mx-auto max-w-5xl p-4 md:p-6 space-y-6">
-       {/* Header remains the same */}
-       <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+       {/* Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
            <h1 className="text-xl font-semibold tracking-tight text-foreground">Statistics</h1>
            <div className="flex flex-wrap justify-center sm:justify-end gap-2">
               {timeRangeOptions.map(option => (
@@ -173,7 +213,7 @@ export function StatsPage() {
        </div>
 
        {/* Summary & Progression Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
            {/* Summary Card */}
            <Card className="lg:col-span-1 border-border/80">
               <CardHeader className="pb-2 pt-4 px-4">
@@ -240,7 +280,8 @@ export function StatsPage() {
             </Card>
        </div>
 
-       {/* Charts Row */}
+
+       {/* --- Charts Row - FINAL VERSION Attempt 3 (Computed RGB Color) --- */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
              {/* Weight Chart Card */}
              <Card className="border-border/80">
@@ -250,13 +291,45 @@ export function StatsPage() {
                 </CardHeader>
                 <CardContent className="pt-2 px-2 pb-0">
                   <div className="h-[250px] w-full">
-                     <ResponsiveContainer width="100%" height="100%">
-                       <LineChart data={weightProgressData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                     {/* Ensure key prop changes if data source changes, forces re-render */}
+                     <ResponsiveContainer width="100%" height="100%" key={selectedTimeRange + "-weight"}>
+                       <LineChart data={weightProgressData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
                          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={gridStrokeColor}/>
-                         <XAxis dataKey="date" tickLine={false} axisLine={false} tickMargin={8} stroke={axisStrokeColor} fontSize={10} />
-                         <YAxis tickLine={false} axisLine={false} tickMargin={8} domain={['auto', 'auto']} stroke={axisStrokeColor} fontSize={10} unit="kg"/>
-                         <Tooltip content={<CustomTooltip />} cursor={{ stroke: axisStrokeColor, strokeDasharray: '3 3' }} />
-                         <Line type="monotone" dataKey="weight" stroke={primaryColor} strokeWidth={2} activeDot={{ r: 5, style: { fill: primaryColor, strokeWidth: 0 } }} name="Weight" dot={false}/>
+                         <XAxis
+                             dataKey="date"
+                             tickLine={false}
+                             axisLine={false}
+                             tickMargin={10}
+                             stroke={axisStrokeColor}
+                             fontSize={10}
+                          />
+                         <YAxis
+                             tickLine={false}
+                             axisLine={false}
+                             tickMargin={8}
+                             domain={weightDomain}
+                             stroke={axisStrokeColor}
+                             fontSize={10}
+                             unit="kg"
+                         />
+                         <Tooltip
+                             content={<CustomTooltip />}
+                             cursor={{ stroke: axisStrokeColor, strokeWidth: 1, strokeDasharray: '3 3' }}
+                             isAnimationActive={false}
+                         />
+                         <Line
+                             type="monotone"
+                             dataKey="weight"
+                             // Use the computed RGB color from state
+                             stroke={computedPrimaryRgbColor}
+                             strokeWidth={2}
+                             activeDot={activeDotStyle}
+                             dot={lineDotStyle}
+                             isAnimationActive={false}
+                             // Pass computed color to tooltip payload
+                             color={computedPrimaryRgbColor}
+                             name="Weight"
+                          />
                        </LineChart>
                      </ResponsiveContainer>
                   </div>
@@ -271,13 +344,41 @@ export function StatsPage() {
                </CardHeader>
                <CardContent className="pt-2 px-2 pb-0">
                   <div className="h-[250px] w-full">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <BarChart data={workoutFrequencyData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                     {/* Ensure key prop changes if data source changes, forces re-render */}
+                     <ResponsiveContainer width="100%" height="100%" key={selectedTimeRange + "-freq"}>
+                      <BarChart data={workoutFrequencyData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={gridStrokeColor} />
-                        <XAxis dataKey="week" tickLine={false} axisLine={false} tickMargin={8} stroke={axisStrokeColor} fontSize={10} />
-                        <YAxis allowDecimals={false} tickLine={false} axisLine={false} tickMargin={8} stroke={axisStrokeColor} fontSize={10} />
-                        <Tooltip content={<CustomTooltip />} cursor={{ fill: 'hsl(var(--muted) / 0.3)' }} />
-                        <Bar dataKey="workouts" fill={primaryColor} radius={[3, 3, 0, 0]} name="Workouts" />
+                        <XAxis
+                            dataKey="week"
+                            tickLine={false}
+                            axisLine={false}
+                            tickMargin={10}
+                            stroke={axisStrokeColor}
+                            fontSize={10}
+                         />
+                        <YAxis
+                            allowDecimals={false}
+                            tickLine={false}
+                            axisLine={false}
+                            tickMargin={8}
+                            stroke={axisStrokeColor}
+                            fontSize={10}
+                         />
+                         <Tooltip
+                             content={<CustomTooltip />}
+                             cursor={{ fill: 'hsl(var(--muted) / 0.3)' }}
+                             isAnimationActive={false}
+                          />
+                        <Bar
+                            dataKey="workouts"
+                             // Bar should use the computed color too for theme consistency
+                            fill={computedPrimaryRgbColor}
+                            radius={[3, 3, 0, 0]}
+                            isAnimationActive={false}
+                            // Pass computed color to tooltip payload
+                            color={computedPrimaryRgbColor}
+                            name="Workouts"
+                         />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -293,19 +394,50 @@ export function StatsPage() {
          </CardHeader>
          <CardContent className="pt-2 px-2 pb-0">
            <div className="h-[250px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={workoutVolumeData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+            {/* Ensure key prop changes if data source changes, forces re-render */}
+            <ResponsiveContainer width="100%" height="100%" key={selectedTimeRange + "-volume"}>
+                <LineChart data={workoutVolumeData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={gridStrokeColor}/>
-                  <XAxis dataKey="date" tickLine={false} axisLine={false} tickMargin={8} stroke={axisStrokeColor} fontSize={10} />
-                  <YAxis tickLine={false} axisLine={false} tickMargin={8} domain={['auto', 'auto']} stroke={axisStrokeColor} fontSize={10}/>
-                  <Tooltip content={<CustomTooltip />} cursor={{ stroke: axisStrokeColor, strokeDasharray: '3 3' }} />
-                  <Line type="monotone" dataKey="volume" stroke={primaryColor} strokeWidth={2} activeDot={{ r: 5, style: { fill: primaryColor, strokeWidth: 0 } }} name="Total Volume" dot={false}/>
+                  <XAxis
+                      dataKey="date"
+                      tickLine={false}
+                      axisLine={false}
+                      tickMargin={10}
+                      stroke={axisStrokeColor}
+                      fontSize={10}
+                   />
+                  <YAxis
+                      tickLine={false}
+                      axisLine={false}
+                      tickMargin={8}
+                      domain={volumeDomain}
+                      stroke={axisStrokeColor}
+                      fontSize={10}
+                      tickFormatter={(value) => value >= 1000 ? `${value / 1000}k` : value.toString()}
+                  />
+                   <Tooltip
+                       content={<CustomTooltip />}
+                       cursor={{ stroke: axisStrokeColor, strokeWidth: 1, strokeDasharray: '3 3' }}
+                       isAnimationActive={false}
+                   />
+                  <Line
+                      type="monotone"
+                      dataKey="volume"
+                      // Use the computed RGB color from state
+                      stroke={computedPrimaryRgbColor}
+                      strokeWidth={2}
+                      activeDot={activeDotStyle}
+                      dot={lineDotStyle}
+                      isAnimationActive={false}
+                      // Pass computed color to tooltip payload
+                      color={computedPrimaryRgbColor}
+                      name="Total Volume"
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </div>
          </CardContent>
        </Card>
-
     </div>
   );
 }

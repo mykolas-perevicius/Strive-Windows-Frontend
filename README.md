@@ -70,7 +70,7 @@ Below is an overview of the repository's directory layout:
 1.  **Clone the repository (if you haven't already):**
     ```bash
     git clone https://github.com/mykolas-perevicius/Strive-Windows-Frontend.git
-    cd Strive-Windows-Frontend
+    cd Frontend_App_Speedrun
     ```
     *(Adjust `cd` command based on your cloned folder name)*
 
@@ -93,6 +93,20 @@ Below is an overview of the repository's directory layout:
     npm run dev
     ```
     The web app will be available at `http://localhost:5173` (or the next available port).
+
+    If you get errors in this step, I recommend updating NodeJS to the latest version first. To verify, run: 
+    ```
+    node -v
+    npm -v
+    ```
+    This should show v22.x.x or at least > v16.x.x
+
+5.  **Development Tips:**
+    * Use Chrome DevTools (F12) for debugging and component inspection
+    * Enable "Toggle device toolbar" (Ctrl+Shift+M) to test responsive design
+    * Check the console (F12 > Console) for any errors or warnings
+    * Use the React Developer Tools browser extension for component debugging
+
 
 ---
 
