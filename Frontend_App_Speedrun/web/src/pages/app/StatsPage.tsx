@@ -1,6 +1,6 @@
 // src/pages/app/StatsPage.tsx
 
-import React from 'react';
+import React, { useState, useEffect } from 'react'; // Import useState and useEffect
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -43,7 +43,7 @@ interface SummaryStats {
 interface TooltipPayloadEntry {
     name: NameType;
     value: ValueType;
-    color?: string;
+    color?: string; // Color passed from Line/Bar component
     unit?: string;
     payload: ChartDataPoint;
 }
@@ -89,18 +89,16 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameT
     const primaryEntry = typedPayload[0];
     const primaryValue = primaryEntry?.value;
     const primaryUnit = getUnit(dataPoint);
-    // Use the color defined in the chart element (Line/Bar) if available, otherwise default
-    const tooltipColor = primaryEntry?.color || 'hsl(var(--foreground))';
+    // Use the color passed from the Line/Bar component via the 'color' prop
+    const tooltipColor = primaryEntry?.color || 'hsl(var(--foreground))'; // Fallback to foreground
 
     return (
       <div className="rounded-lg border border-border/80 bg-background/90 p-2.5 shadow-lg backdrop-blur-sm">
         <div className="mb-1.5 font-semibold text-foreground">{label}</div>
         <div className="flex items-baseline space-x-1.5 text-sm">
-           {/* Display the series name (e.g., "Weight", "Volume") */}
            <span className="font-medium" style={{ color: tooltipColor }}>
              {primaryEntry?.name}:
            </span>
-           {/* Display the value */}
            <span className="font-semibold text-foreground">
              {primaryValue !== undefined && primaryValue !== null ? primaryValue.toString() : 'N/A'}
              {primaryUnit}
@@ -116,7 +114,38 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameT
 // --- Stats Page Component ---
 export function StatsPage() {
   const [selectedTimeRange, setSelectedTimeRange] = React.useState<TimeRange>("month");
+  // State to hold the computed primary color (using RGB this time)
+  const [computedPrimaryRgbColor, setComputedPrimaryRgbColor] = useState('rgb(0, 0, 0)'); // Default fallback (black)
   const summaryStatsData: SummaryStats = getSummaryStatsData(selectedTimeRange);
+
+  // Effect to get the computed primary color (as RGB) after mount
+  useEffect(() => {
+    // Temporary element to apply the CSS variable to
+    const tempElement = document.createElement('div');
+    // Apply the CSS variable inline - browser will compute it
+    tempElement.style.color = 'hsl(var(--primary))';
+    // Append to body briefly to allow computation
+    document.body.appendChild(tempElement);
+
+    try {
+        // Get the *computed* color style (likely in rgb format)
+        const computedColor = window.getComputedStyle(tempElement).color;
+        if (computedColor) {
+          setComputedPrimaryRgbColor(computedColor);
+          console.log("Computed Primary Color (RGB):", computedColor); // Log for debugging
+        } else {
+            console.warn("Could not compute color from --primary CSS variable.");
+            // Keep fallback (e.g., black or a theme-agnostic gray)
+            setComputedPrimaryRgbColor('rgb(50, 50, 50)'); // Dark gray fallback
+        }
+    } catch (error) {
+        console.error("Error computing primary color:", error);
+        setComputedPrimaryRgbColor('rgb(50, 50, 50)'); // Dark gray fallback
+    } finally {
+        // Clean up the temporary element
+        document.body.removeChild(tempElement);
+    }
+  }, []); // Empty dependency array ensures this runs once on mount
 
   const timeRangeOptions: { value: TimeRange; label: string }[] = [
     { value: "week", label: "Last Week" },
@@ -124,14 +153,10 @@ export function StatsPage() {
     { value: "year", label: "Last Year" },
   ];
 
-  // Define theme-aware colors for non-line elements
+  // Define theme-aware colors for axes/grids
   const axisStrokeColor = "hsl(var(--muted-foreground) / 0.7)";
   const gridStrokeColor = "hsl(var(--border) / 0.7)";
-  // Use the explicit color for lines that worked
-  const linePrimaryColor = "black";
-  // Still use the theme primary for other elements like the Bar chart if needed
-  const themePrimaryColor = "hsl(var(--primary))";
-
+  // linePrimaryColor now comes from state: computedPrimaryRgbColor
 
   // Helper for progression icons
   const TrendIcon = ({ trend }: { trend: 'up' | 'down' | 'same' }) => {
@@ -154,16 +179,16 @@ export function StatsPage() {
   const maxVolume = Math.max(...volumeValues);
   const volumeDomain: [number, number] = [Math.floor(minVolume * 0.98), Math.ceil(maxVolume * 1.02)];
 
-  // Define dot styles using reliable colors
+  // Define dot styles using the *computed* RGB color from state
   const lineDotStyle = {
-    stroke: 'hsl(var(--foreground) / 0.8)', // Use foreground for dot border for contrast
+    stroke: computedPrimaryRgbColor, // Use computed color for dot stroke
     strokeWidth: 1,
     r: 3,
-    fill: 'hsl(var(--background))' // Hollow effect adapting to theme
+    fill: 'hsl(var(--background))' // Hollow effect adapting to theme background
   };
   const activeDotStyle = {
     r: 5,
-    fill: linePrimaryColor, // Fill active dot with the line color (black)
+    fill: computedPrimaryRgbColor, // Use computed color for active dot fill
     strokeWidth: 0
   };
 
@@ -171,7 +196,7 @@ export function StatsPage() {
   return (
     <div className="container mx-auto max-w-5xl p-4 md:p-6 space-y-6">
        {/* Header */}
-       <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
            <h1 className="text-xl font-semibold tracking-tight text-foreground">Statistics</h1>
            <div className="flex flex-wrap justify-center sm:justify-end gap-2">
               {timeRangeOptions.map(option => (
@@ -255,7 +280,8 @@ export function StatsPage() {
             </Card>
        </div>
 
-       {/* --- Charts Row - FINAL VERSION --- */}
+
+       {/* --- Charts Row - FINAL VERSION Attempt 3 (Computed RGB Color) --- */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
              {/* Weight Chart Card */}
              <Card className="border-border/80">
@@ -265,7 +291,8 @@ export function StatsPage() {
                 </CardHeader>
                 <CardContent className="pt-2 px-2 pb-0">
                   <div className="h-[250px] w-full">
-                     <ResponsiveContainer width="100%" height="100%">
+                     {/* Ensure key prop changes if data source changes, forces re-render */}
+                     <ResponsiveContainer width="100%" height="100%" key={selectedTimeRange + "-weight"}>
                        <LineChart data={weightProgressData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
                          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={gridStrokeColor}/>
                          <XAxis
@@ -293,13 +320,14 @@ export function StatsPage() {
                          <Line
                              type="monotone"
                              dataKey="weight"
-                             stroke={linePrimaryColor} // Use explicit black color
+                             // Use the computed RGB color from state
+                             stroke={computedPrimaryRgbColor}
                              strokeWidth={2}
                              activeDot={activeDotStyle}
                              dot={lineDotStyle}
                              isAnimationActive={false}
-                             // Pass the line color to the tooltip payload if needed by CustomTooltip
-                             color={linePrimaryColor}
+                             // Pass computed color to tooltip payload
+                             color={computedPrimaryRgbColor}
                              name="Weight"
                           />
                        </LineChart>
@@ -316,7 +344,8 @@ export function StatsPage() {
                </CardHeader>
                <CardContent className="pt-2 px-2 pb-0">
                   <div className="h-[250px] w-full">
-                    <ResponsiveContainer width="100%" height="100%">
+                     {/* Ensure key prop changes if data source changes, forces re-render */}
+                     <ResponsiveContainer width="100%" height="100%" key={selectedTimeRange + "-freq"}>
                       <BarChart data={workoutFrequencyData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={gridStrokeColor} />
                         <XAxis
@@ -342,11 +371,12 @@ export function StatsPage() {
                           />
                         <Bar
                             dataKey="workouts"
-                            fill={themePrimaryColor} // Use theme primary for bars
+                             // Bar should use the computed color too for theme consistency
+                            fill={computedPrimaryRgbColor}
                             radius={[3, 3, 0, 0]}
                             isAnimationActive={false}
-                             // Pass the bar color to the tooltip payload
-                            color={themePrimaryColor}
+                            // Pass computed color to tooltip payload
+                            color={computedPrimaryRgbColor}
                             name="Workouts"
                          />
                       </BarChart>
@@ -364,7 +394,8 @@ export function StatsPage() {
          </CardHeader>
          <CardContent className="pt-2 px-2 pb-0">
            <div className="h-[250px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
+            {/* Ensure key prop changes if data source changes, forces re-render */}
+            <ResponsiveContainer width="100%" height="100%" key={selectedTimeRange + "-volume"}>
                 <LineChart data={workoutVolumeData} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={gridStrokeColor}/>
                   <XAxis
@@ -392,13 +423,14 @@ export function StatsPage() {
                   <Line
                       type="monotone"
                       dataKey="volume"
-                      stroke={linePrimaryColor} // Use explicit black color
+                      // Use the computed RGB color from state
+                      stroke={computedPrimaryRgbColor}
                       strokeWidth={2}
                       activeDot={activeDotStyle}
                       dot={lineDotStyle}
                       isAnimationActive={false}
-                      // Pass the line color to the tooltip payload
-                      color={linePrimaryColor}
+                      // Pass computed color to tooltip payload
+                      color={computedPrimaryRgbColor}
                       name="Total Volume"
                   />
                 </LineChart>
