@@ -1,4 +1,5 @@
 // src/pages/LoginPage.tsx
+import React, { useState } from "react"; // Import React and useState
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,34 +11,66 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom";
+
+// Expected response structure from backend /login
+interface LoginResponse {
+    token?: string;
+    message?: string; // Optional success message
+    error?: string;
+}
 
 export function LoginPage() {
-  const navigate = useNavigate(); // <-- Initialize navigate hook
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLoginSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevent default form submission
+  const handleLoginSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError(null);
+    setIsLoading(true);
 
-    // Dummy action: Log form data
-    const formData = new FormData(event.currentTarget);
-    const loginData = {
-      email: formData.get('email'),
-      // Don't log passwords in real applications
-      // password: formData.get('password'),
-    };
-    console.log("Login submitted with data:", loginData);
+    if (!email || !password) {
+        setError("Email and password are required.");
+        setIsLoading(false);
+        return;
+    }
 
-    // Add your actual login logic here (e.g., API call, validation)
-    // Simulate successful login
-    const isLoginSuccessful = true; // Replace with actual check
+    const loginData = { email, password };
 
-    if (isLoginSuccessful) {
-      console.log("Login successful (dummy), navigating to dashboard...");
-      navigate('/dashboard'); // <-- Navigate to /dashboard on success
-    } else {
-      // Handle login failure (e.g., show error message)
-      console.error("Login failed (dummy)");
-      // Example: setError("Invalid email or password.");
+    try {
+        const response = await fetch('http://localhost:8080/login', { // Target the backend login endpoint
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(loginData),
+        });
+
+        const result: LoginResponse = await response.json();
+
+        if (response.ok && result.token) {
+            // --- Login Successful ---
+            console.log("Login successful");
+            // Store the token securely (localStorage is simple, consider more secure options for production)
+            localStorage.setItem('authToken', result.token);
+            // Navigate to the main app dashboard/profile page
+            navigate('/dashboard'); // Or '/profile'
+
+        } else {
+            // --- Login Failed (Backend Error or No Token) ---
+            const errorMessage = result.error || `Login failed (Status: ${response.status}). Please check credentials.`;
+            console.error("Login failed:", errorMessage);
+            setError(errorMessage);
+        }
+    } catch (networkError) {
+        // --- Network or other fetch errors ---
+        console.error("Network error during login:", networkError);
+        setError("Network error. Please check your connection and try again.");
+    } finally {
+        setIsLoading(false); // Stop loading regardless of outcome
     }
   };
 
@@ -57,11 +90,14 @@ export function LoginPage() {
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
-                name="email" // Add name attribute for FormData access
+                name="email"
                 type="email"
                 placeholder="you@example.com"
                 required
                 autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isLoading}
               />
             </div>
             {/* Password Input */}
@@ -69,7 +105,7 @@ export function LoginPage() {
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">Password</Label>
                 <Link
-                  to="/forgot-password" // Link to a future forgot password page
+                  to="/forgot-password"
                   className="text-sm text-muted-foreground hover:text-primary underline-offset-4 hover:underline"
                 >
                   Forgot password?
@@ -77,24 +113,29 @@ export function LoginPage() {
               </div>
               <Input
                 id="password"
-                name="password" // Add name attribute for FormData access
+                name="password"
                 type="password"
                 placeholder="••••••••"
                 required
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={isLoading}
               />
             </div>
-             {/* Placeholder for error messages if needed */}
-             {/* {error && <p className="text-sm text-destructive">{error}</p>} */}
+             {/* Display error messages */}
+             {error && (
+                 <p className="text-sm text-destructive">{error}</p>
+             )}
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
-             <Button type="submit" className="w-full">
-              Login
+             <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? 'Logging in...' : 'Login'}
             </Button>
              <p className="text-center text-sm text-muted-foreground">
               Don't have an account?{' '}
               <Link
-                to="/register" // Link to the register page
+                to="/register"
                 className="font-medium text-primary underline-offset-4 hover:underline"
               >
                 Register
