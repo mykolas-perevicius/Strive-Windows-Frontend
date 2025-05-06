@@ -29,6 +29,7 @@ import SettingsSubscriptionPage from '@/pages/app/settings/SettingsSubscriptionP
 import SettingsLanguagePage from '@/pages/app/settings/SettingsLanguagePage';
 import SettingsContactPage from '@/pages/app/settings/SettingsContactPage';
 
+import PostWorkoutSurveyPage from '@/pages/app/PostWorkoutSurveyPage';
 // --- Not Found Page (Optional) ---
 // import NotFoundPage from '@/pages/NotFoundPage';
 
@@ -53,6 +54,7 @@ function App() {
         {/* *** ADD THE ROUTE FOR CREATING A WORKOUT *** */}
         <Route path="/app/workouts/new" element={<CreateWorkoutPage />} />
         <Route path="/app/active-workout" element={<ActiveWorkoutPage />} />
+        <Route path="/post-workout-survey" element={<PostWorkoutSurveyPage />} />
         {/* Example route for viewing/editing a specific workout template (future) */}
         {/* <Route path="/app/workouts/:templateId" element={<ViewWorkoutTemplatePage />} /> */}
         {/* Example route for an active workout session (future) */}

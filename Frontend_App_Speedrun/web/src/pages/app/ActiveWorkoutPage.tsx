@@ -500,6 +500,10 @@ import React, {
   
         {/* Finish early */}
         <div className="pt-6 text-center">
+          <Button onClick={() => navigate('/post-workout-survey')}>
+            Finish &amp; Take Survey
+          </Button>
+
           <Button
             variant="outline"
             className="border-destructive text-destructive hover:bg-destructive/10 hover:text-destructive"

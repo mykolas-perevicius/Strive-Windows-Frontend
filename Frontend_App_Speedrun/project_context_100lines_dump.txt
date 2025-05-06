@@ -1,12 +1,4 @@
 ﻿
---- START FILE (First 100 lines): web\public\vite.svg ---
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="31.88" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 257"><defs><linearGradient id="IconifyId1813088fe1fbc01fb466" x1="-.828%" x2="57.636%" y1="7.652%" y2="78.411%"><stop offset="0%" stop-color="#41D1FF"></stop><stop offset="100%" stop-color="#BD34FE"></stop></linearGradient><linearGradient id="IconifyId1813088fe1fbc01fb467" x1="43.376%" x2="50.316%" y1="2.242%" y2="89.03%"><stop offset="0%" stop-color="#FFEA83"></stop><stop offset="8.333%" stop-color="#FFDD35"></stop><stop offset="100%" stop-color="#FFA800"></stop></linearGradient></defs><path fill="url(#IconifyId1813088fe1fbc01fb466)" d="M255.153 37.938L134.897 252.976c-2.483 4.44-8.862 4.466-11.382.048L.875 37.958c-2.746-4.814 1.371-10.646 6.827-9.67l120.385 21.517a6.537 6.537 0 0 0 2.322-.004l117.867-21.483c5.438-.991 9.574 4.796 6.877 9.62Z"></path><path fill="url(#IconifyId1813088fe1fbc01fb467)" d="M185.432.063L96.44 17.501a3.268 3.268 0 0 0-2.634 3.014l-5.474 92.456a3.268 3.268 0 0 0 3.997 3.378l24.777-5.718c2.318-.535 4.413 1.507 3.936 3.838l-7.361 36.047c-.495 2.426 1.782 4.5 4.151 3.78l15.304-4.649c2.372-.72 4.652 1.36 4.15 3.788l-11.698 56.621c-.732 3.542 3.979 5.473 5.943 2.437l1.313-2.028l72.516-144.72c1.215-2.423-.88-5.186-3.54-4.672l-25.505 4.922c-2.396.462-4.435-1.77-3.759-4.114l16.646-57.705c.677-2.35-1.37-4.583-3.769-4.113Z"></path></svg>
---- END FILE: web\public\vite.svg ---
-
---- START FILE (First 100 lines): web\src\assets\react.svg ---
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="35.93" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 228"><path fill="#00D8FF" d="M210.483 73.824a171.49 171.49 0 0 0-8.24-2.597c.465-1.9.893-3.777 1.273-5.621c6.238-30.281 2.16-54.676-11.769-62.708c-13.355-7.7-35.196.329-57.254 19.526a171.23 171.23 0 0 0-6.375 5.848a155.866 155.866 0 0 0-4.241-3.917C100.759 3.829 77.587-4.822 63.673 3.233C50.33 10.957 46.379 33.89 51.995 62.588a170.974 170.974 0 0 0 1.892 8.48c-3.28.932-6.445 1.924-9.474 2.98C17.309 83.498 0 98.307 0 113.668c0 15.865 18.582 31.778 46.812 41.427a145.52 145.52 0 0 0 6.921 2.165a167.467 167.467 0 0 0-2.01 9.138c-5.354 28.2-1.173 50.591 12.134 58.266c13.744 7.926 36.812-.22 59.273-19.855a145.567 145.567 0 0 0 5.342-4.923a168.064 168.064 0 0 0 6.92 6.314c21.758 18.722 43.246 26.282 56.54 18.586c13.731-7.949 18.194-32.003 12.4-61.268a145.016 145.016 0 0 0-1.535-6.842c1.62-.48 3.21-.974 4.76-1.488c29.348-9.723 48.443-25.443 48.443-41.52c0-15.417-17.868-30.326-45.517-39.844Zm-6.365 70.984c-1.4.463-2.836.91-4.3 1.345c-3.24-10.257-7.612-21.163-12.963-32.432c5.106-11 9.31-21.767 12.459-31.957c2.619.758 5.16 1.557 7.61 2.4c23.69 8.156 38.14 20.213 38.14 29.504c0 9.896-15.606 22.743-40.946 31.14Zm-10.514 20.834c2.562 12.94 2.927 24.64 1.23 33.787c-1.524 8.219-4.59 13.698-8.382 15.893c-8.067 4.67-25.32-1.4-43.927-17.412a156.726 156.726 0 0 1-6.437-5.87c7.214-7.889 14.423-17.06 21.459-27.246c12.376-1.098 24.068-2.894 34.671-5.345a134.17 134.17 0 0 1 1.386 6.193ZM87.276 214.515c-7.882 2.783-14.16 2.863-17.955.675c-8.075-4.657-11.432-22.636-6.853-46.752a156.923 156.923 0 0 1 1.869-8.499c10.486 2.32 22.093 3.988 34.498 4.994c7.084 9.967 14.501 19.128 21.976 27.15a134.668 134.668 0 0 1-4.877 4.492c-9.933 8.682-19.886 14.842-28.658 17.94ZM50.35 144.747c-12.483-4.267-22.792-9.812-29.858-15.863c-6.35-5.437-9.555-10.836-9.555-15.216c0-9.322 13.897-21.212 37.076-29.293c2.813-.98 5.757-1.905 8.812-2.773c3.204 10.42 7.406 21.315 12.477 32.332c-5.137 11.18-9.399 22.249-12.634 32.792a134.718 134.718 0 0 1-6.318-1.979Zm12.378-84.26c-4.811-24.587-1.616-43.134 6.425-47.789c8.564-4.958 27.502 2.111 47.463 19.835a144.318 144.318 0 0 1 3.841 3.545c-7.438 7.987-14.787 17.08-21.808 26.988c-12.04 1.116-23.565 2.908-34.161 5.309a160.342 160.342 0 0 1-1.76-7.887Zm110.427 27.268a347.8 347.8 0 0 0-7.785-12.803c8.168 1.033 15.994 2.404 23.343 4.08c-2.206 7.072-4.956 14.465-8.193 22.045a381.151 381.151 0 0 0-7.365-13.322Zm-45.032-43.861c5.044 5.465 10.096 11.566 15.065 18.186a322.04 322.04 0 0 0-30.257-.006c4.974-6.559 10.069-12.652 15.192-18.18ZM82.802 87.83a323.167 323.167 0 0 0-7.227 13.238c-3.184-7.553-5.909-14.98-8.134-22.152c7.304-1.634 15.093-2.97 23.209-3.984a321.524 321.524 0 0 0-7.848 12.897Zm8.081 65.352c-8.385-.936-16.291-2.203-23.593-3.793c2.26-7.3 5.045-14.885 8.298-22.6a321.187 321.187 0 0 0 7.257 13.246c2.594 4.48 5.28 8.868 8.038 13.147Zm37.542 31.03c-5.184-5.592-10.354-11.779-15.403-18.433c4.902.192 9.899.29 14.978.29c5.218 0 10.376-.117 15.453-.343c-4.985 6.774-10.018 12.97-15.028 18.486Zm52.198-57.817c3.422 7.8 6.306 15.345 8.596 22.52c-7.422 1.694-15.436 3.058-23.88 4.071a382.417 382.417 0 0 0 7.859-13.026a347.403 347.403 0 0 0 7.425-13.565Zm-16.898 8.101a358.557 358.557 0 0 1-12.281 19.815a329.4 329.4 0 0 1-23.444.823c-7.967 0-15.716-.248-23.178-.732a310.202 310.202 0 0 1-12.513-19.846h.001a307.41 307.41 0 0 1-10.923-20.627a310.278 310.278 0 0 1 10.89-20.637l-.001.001a307.318 307.318 0 0 1 12.413-19.761c7.613-.576 15.42-.876 23.31-.876H128c7.926 0 15.743.303 23.354.883a329.357 329.357 0 0 1 12.335 19.695a358.489 358.489 0 0 1 11.036 20.54a329.472 329.472 0 0 1-11 20.722Zm22.56-122.124c8.572 4.944 11.906 24.881 6.52 51.026c-.344 1.668-.73 3.367-1.15 5.09c-10.622-2.452-22.155-4.275-34.23-5.408c-7.034-10.017-14.323-19.124-21.64-27.008a160.789 160.789 0 0 1 5.888-5.4c18.9-16.447 36.564-22.941 44.612-18.3ZM128 90.808c12.625 0 22.86 10.235 22.86 22.86s-10.235 22.86-22.86 22.86s-22.86-10.235-22.86-22.86s10.235-22.86 22.86-22.86Z"></path></svg>
---- END FILE: web\src\assets\react.svg ---
-
 --- START FILE (First 100 lines): web\src\components\contexts\appSettingsContext.ts ---
 // src/components/contexts/appSettingsContext.ts
 import { createContext } from 'react';
@@ -1954,111 +1946,111 @@ export function SettingsSubscriptionPage() {
 --- END FILE: web\src\pages\app\settings\SettingsSubscriptionPage.tsx ---
 
 --- START FILE (First 100 lines): web\src\pages\app\ActiveWorkoutPage.tsx ---
-// src/pages/app/ActiveWorkoutPage.tsx
-
-// Removed unused React import
-import { useState, useEffect, useMemo, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Progress } from "@/components/ui/progress";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { ActiveWorkoutSession, ActiveExercise } from '@/types/workout';
-import {
-    CheckCircle, XCircle, Timer, SkipForward,
-} from 'lucide-react';
-import { formatTimeElapsed } from '@/lib/utils';
-import { workoutTemplates as dummyTemplates } from "@/data/dummyWorkouts";
-import React from 'react';
-
-// --- loadWorkoutSession function remains the same ---
-const loadWorkoutSession = (templateId: string | null): ActiveWorkoutSession | null => {
-    let workoutName = "Blank Workout";
-    let baseExercises: Omit<ActiveExercise, 'loggedSets'>[] = [];
-
-    if (templateId) {
-        let foundTemplate: { id: string; name: string; exercises: string[] } | undefined;
-        for (const category in dummyTemplates) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const categoryTemplates = (dummyTemplates as any)[category];
-            if (Array.isArray(categoryTemplates)) {
-                const template = categoryTemplates.find((t: { id: string }) => t.id === templateId);
-                if (template) {
-                    foundTemplate = template;
-                    break;
-                }
-            }
-        }
-
-        if (foundTemplate) {
-            workoutName = foundTemplate.name;
-            baseExercises = foundTemplate.exercises.map((exName, index) => ({
-                id: `${templateId}-ex${index}-${crypto.randomUUID()}`, name: exName,
-                sets: 3, reps: 10, weight: 50, restTimeSeconds: 60, // Placeholders
-            }));
-        } else {
-            console.error(`Template with ID ${templateId} not found.`);
-            return null;
-        }
-    } else {
-        console.log("Starting a truly blank session - not implemented");
-        return null;
+/* eslint-disable no-irregular-whitespace */
+/* ------------------------------------------------------------------------- */
+/* ActiveWorkoutPage.tsx                                                     */
+/* ------------------------------------------------------------------------- */
+import React, {
+    useState,
+    useEffect,
+    useMemo,
+    useCallback,
+    useRef,
+  } from 'react';
+  import { useLocation, useNavigate } from 'react-router-dom';
+  
+  import { Button } from '@/components/ui/button';
+  import {
+    Card,
+    CardHeader,
+    CardTitle,
+    CardDescription,
+    CardContent,
+    CardFooter,
+  } from '@/components/ui/card';
+  import { Label } from '@/components/ui/label';
+  import { Progress } from '@/components/ui/progress';
+  import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter,
+  } from '@/components/ui/dialog';
+  import {
+    AlertDialog,
+    AlertDialogContent,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogCancel,
+    AlertDialogAction,
+  } from '@/components/ui/alert-dialog';
+  import { Minus, Plus, Timer, CheckCircle, SkipForward, XCircle } from 'lucide-react';
+  
+  import { workoutTemplates as dummyTemplates } from '@/data/dummyWorkouts';
+  import { formatTimeElapsed } from '@/lib/utils';
+  import type { ActiveExercise, ActiveWorkoutSession } from '@/types/workout';
+  
+  /* ------------------ helpers ------------------ */
+  const clone = <T,>(o: T): T =>
+    typeof structuredClone === 'function'
+      ? structuredClone(o)
+      : (JSON.parse(JSON.stringify(o)) as T);
+  
+  /* ------------------ dummy loader ------------- */
+  const loadWorkoutSession = (templateId: string | null): ActiveWorkoutSession | null => {
+    if (!templateId) return null;
+    // find template
+    let tpl: { id: string; name: string; exercises: string[] } | undefined;
+    for (const c in dummyTemplates) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const arr = (dummyTemplates as any)[c];
+      if (Array.isArray(arr)) {
+        tpl = arr.find((t: { id: string }) => t.id === templateId);
+        if (tpl) break;
+      }
     }
-
-    const activeExercises: ActiveExercise[] = baseExercises.map(ex => ({
-        ...ex,
-        loggedSets: Array.from({ length: ex.sets }, (_, i) => ({
-            setIndex: i, reps: null, weight: null, completedAt: null,
-        })),
+    if (!tpl) return null;
+  
+    const exercises: ActiveExercise[] = tpl.exercises.map((name, i) => ({
+      id: `${templateId}-ex${i}-${crypto.randomUUID()}`,
+      name,
+      sets: 3,
+      reps: 10,
+      weight: 50,
+      restTimeSeconds: 60,
+      loggedSets: Array.from({ length: 3 }, (_, j) => ({
+        setIndex: j,
+        reps: null,
+        weight: null,
+        completedAt: null,
+      })),
     }));
-
-    if (activeExercises.length === 0) {
-        console.error("Cannot start session with no exercises.");
-        return null;
-    }
-
+  
     return {
-        sessionId: crypto.randomUUID(), templateId: templateId, workoutName: workoutName,
-        exercises: activeExercises, currentExerciseIndex: 0, currentSetIndex: 0,
-        startTime: new Date().toISOString(), endTime: null, status: 'in-progress',
-        isResting: false, restDurationSeconds: 0, restEndTime: null,
+      sessionId: crypto.randomUUID(),
+      templateId,
+      workoutName: tpl.name,
+      exercises,
+      currentExerciseIndex: 0,
+      currentSetIndex: 0,
+      startTime: new Date().toISOString(),
+      endTime: null,
+      status: 'in-progress',
+      isResting: false,
+      restDurationSeconds: 0,
+      restEndTime: null,
     };
-};
-// --- End Dummy Data Fetching ---
-
-
-export function ActiveWorkoutPage() {
-    const location = useLocation();
-    const navigate = useNavigate();
-    const queryParams = new URLSearchParams(location.search);
-    const templateId = queryParams.get('template');
-
-    const [session, setSession] = useState<ActiveWorkoutSession | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-    const [currentReps, setCurrentReps] = useState<string>('');
-    const [currentWeight, setCurrentWeight] = useState<string>('');
-    const [elapsedTime, setElapsedTime] = useState(0);
-    const [isFinishAlertOpen, setIsFinishAlertOpen] = useState(false);
-    const [restTimeRemaining, setRestTimeRemaining] = useState<number>(0);
-
-    // --- useEffect for loading session ---
-     useEffect(() => {
-        console.log("Attempting to load session for template ID:", templateId);
-        setIsLoading(true); setError(null);
-        const loadedSession = loadWorkoutSession(templateId);
-        if (loadedSession) {
-            setSession(loadedSession);
-            if (loadedSession.exercises.length > 0) {
-                 const firstExercise = loadedSession.exercises[0];
+  };
+  
+  /* ------------------------------------------------------------------------- */
 --- END FILE: web\src\pages\app\ActiveWorkoutPage.tsx ---
 
 --- START FILE (First 100 lines): web\src\pages\app\CalendarPage.tsx ---
 // src/pages/app/CalendarPage.tsx
-import React from 'react';
+import React, { useEffect } from 'react'; // Import useEffect for logging
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 // import { Button } from '@/components/ui/button'; // <-- REMOVE THIS LINE
@@ -2074,7 +2066,10 @@ const workoutLog: Record<string, { workoutName: string; id: string }[]> = {
 // Generate Date objects for calendar modifier
 const workoutDays = Object.keys(workoutLog).map(dateStr => {
     const [year, month, day] = dateStr.split('-').map(Number);
-    return new Date(year, month - 1, day); // Month is 0-indexed
+    // Add validation for NaN dates if needed
+    const dateObj = new Date(year, month - 1, day);
+    // console.log(`Parsed date string ${dateStr} to Date:`, dateObj); // Log date parsing
+    return dateObj;
 });
 
 
@@ -2082,26 +2077,43 @@ export function CalendarPage() {
   const [selectedDate, setSelectedDate] = React.useState<Date | undefined>(new Date());
   const [currentMonth, setCurrentMonth] = React.useState<Date>(new Date());
 
+  // --- Logging ---
+  useEffect(() => {
+    console.log("CalendarPage mounted or updated.");
+    console.log("Current selectedDate:", selectedDate);
+    console.log("Current currentMonth:", currentMonth);
+    console.log("Workout days for modifier:", workoutDays);
+  }, [selectedDate, currentMonth]); // Re-log if state changes
+
   const selectedDateString = selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '';
   const workoutsForSelectedDate = workoutLog[selectedDateString] || [];
+
+  // --- Check calculated values ---
+  // console.log("Selected date string:", selectedDateString);
+  // console.log("Workouts for selected date:", workoutsForSelectedDate);
 
   return (
     <div className="container mx-auto max-w-5xl p-4 md:p-6 space-y-6">
        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Workout Calendar</h1>
        <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 gap-6">
+          {/* Card containing the calendar */}
           <Card className="lg:col-span-2">
+             {/* Apply mx-auto to center the calendar within the card */}
              <Calendar
                mode="single"
                selected={selectedDate}
                onSelect={setSelectedDate}
                month={currentMonth}
                onMonthChange={setCurrentMonth}
-               className="p-3 sm:p-4"
+               // className="p-3 sm:p-4" // Original
+               className="p-3 sm:p-4 mx-auto" // <-- FIX: Added mx-auto
                modifiers={{
                  workout: workoutDays,
                  selectedWorkout: (date) => {
-                    return workoutDays.some(wd => wd.toDateString() === date.toDateString()) &&
-                           selectedDate?.toDateString() === date.toDateString();
+                    // Ensure valid dates before comparison
+                    if (!date || !selectedDate) return false;
+                    const isValidWorkoutDay = workoutDays.some(wd => wd && wd.toDateString() === date.toDateString());
+                    return isValidWorkoutDay && selectedDate?.toDateString() === date.toDateString();
                  }
                }}
                modifiersClassNames={{
@@ -2111,13 +2123,15 @@ export function CalendarPage() {
                }}
                showOutsideDays={false}
              />
-             <div className="p-4 border-t text-xs text-muted-foreground flex items-center gap-4">
+             {/* Legend */}
+             <div className="p-4 border-t text-xs text-muted-foreground flex items-center justify-center gap-4"> {/* Centered legend */}
                  <span>Legend:</span>
                  <span className='flex items-center gap-1.5'><span className='inline-block w-3 h-3 rounded-full bg-muted'></span>Today</span>
                  <span className='flex items-center gap-1.5'><span className='inline-block w-3 h-3 border border-primary/50 rounded'></span>Workout Logged</span>
              </div>
           </Card>
 
+          {/* Card for selected day details */}
           <div className="lg:col-span-1">
              <Card className="min-h-[200px]">
                 <CardHeader>
@@ -2135,26 +2149,6 @@ export function CalendarPage() {
                                 {workoutsForSelectedDate.map(workout => (
                                     <li key={workout.id} className="text-sm p-2 bg-muted/50 rounded-md hover:bg-muted transition-colors">
                                         <button onClick={() => console.log("Navigate to workout:", workout.id)} className="w-full text-left">
-                                            {workout.workoutName}
-                                        </button>
-                                    </li>
-                                ))}
-                            </ul>
-                        ) : (
-                            <p className="text-sm text-muted-foreground italic">No workouts logged.</p>
-                        )
-                    ) : (
-                        <p className="text-sm text-muted-foreground">Details will appear here.</p>
-                    )}
-                </CardContent>
-             </Card>
-          </div>
-       </div>
-    </div>
-  );
-}
-
-export default CalendarPage;
 --- END FILE: web\src\pages\app\CalendarPage.tsx ---
 
 --- START FILE (First 100 lines): web\src\pages\app\CreateWorkoutPage.tsx ---
@@ -2370,105 +2364,105 @@ export default PlaceholderPage;
 
 --- START FILE (First 100 lines): web\src\pages\app\ProfilePage.tsx ---
 // src/pages/app/ProfilePage.tsx
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import React, { useState, useEffect } from 'react'; // Import React hooks
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+// import {  AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Settings, Trophy } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Settings, Trophy, RefreshCw, AlertCircle } from "lucide-react"; // Added icons
+import { Link, useNavigate } from "react-router-dom";
 
-// Dummy user data - replace with actual data fetching later
-const userData = {
-  name: "Mitch", // Replace with dynamic data
-  avatarUrl: null, // Replace with actual URL or keep null for fallback
-  initials: "MC", // Replace with dynamic initials
-  age: 28, // Replace with dynamic data
-  weight: 85, // Replace with dynamic data (kg?)
-  height: 180, // Replace with dynamic data (cm?)
-};
+// Define the structure of the profile data expected from the backend
+interface UserProfile {
+  name?: string | null;
+  age?: number | null;
+  height?: number | null; // Matches backend JSON 'height' tag for height_cm
+  weight?: number | null; // Matches backend JSON 'weight' tag for weight_kg
+  // avatarUrl?: string | null; // Add later if implemented
+}
 
-// Dummy Personal Records data
+// Define the structure of the API response for GET /profile
+interface GetProfileResponse {
+    profile?: UserProfile | null;
+    message?: string; // Optional message (e.g., if profile not found)
+    error?: string;
+}
+
+// --- Keep Dummy Personal Records for now ---
 const personalRecords = [
   { id: 1, workout: "Bench Press", details: "12 x 100 kg", time: "0:59" },
   { id: 2, workout: "Squat", details: "8 x 140 kg", time: "1:15" },
   { id: 3, workout: "Deadlift", details: "5 x 180 kg", time: "1:30" },
-  // Add more records...
 ];
+// --- End Dummy Data ---
+
 
 export function ProfilePage() {
-  return (
-    // Ensures the page container itself grows and centers its content
-    // Use min-h-screen if content is short and centering looks weird vertically
-    <div className="flex flex-1 flex-col items-center p-4 md:p-6">
-      {/* Content Wrapper: Re-introduce max-width and padding here */}
-      <div className="w-full max-w-3xl">
-        {/* Top Action Icons */}
-        <div className="mb-6 flex justify-between">
-          <Link to="/personal-records" aria-label="Personal Records">
-            <Button variant="ghost" size="icon">
-              <Trophy className="h-6 w-6" />
-            </Button>
-          </Link>
-          <Link to="/settings" aria-label="Settings">
-            <Button variant="ghost" size="icon">
-              <Settings className="h-6 w-6" />
-            </Button>
-          </Link>
-        </div>
+  const navigate = useNavigate();
+  const [profileData, setProfileData] = useState<UserProfile | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-        {/* Profile Header */}
-        <div className="mb-8 flex flex-col items-center space-y-4">
-          <Avatar className="h-24 w-24 border sm:h-32 sm:w-32">
-            <AvatarImage src={userData.avatarUrl ?? undefined} alt={userData.name} />
-            <AvatarFallback className="text-3xl sm:text-4xl">
-              {userData.initials}
-            </AvatarFallback>
-          </Avatar>
-          <h1 className="text-2xl font-bold sm:text-3xl">{userData.name}</h1>
-        </div>
+  // Function to generate initials from name
+  const getInitials = (name?: string | null): string => {
+    if (!name) return "?";
+    const names = name.split(' ');
+    if (names.length === 1) return names[0].charAt(0).toUpperCase();
+    return (names[0].charAt(0) + names[names.length - 1].charAt(0)).toUpperCase();
+  };
 
-        {/* Profile Details Grid */}
-        <div className="grid grid-cols-3 gap-x-4 gap-y-6 text-center">
-          <div>
-            <p className="text-sm font-medium text-muted-foreground">Age</p>
-            <p className="text-lg font-semibold">{userData.age}</p>
-          </div>
-          <div>
-            <p className="text-sm font-medium text-muted-foreground">Weight</p>
-            <p className="text-lg font-semibold">{userData.weight} kg</p>
-          </div>
-          <div>
-            <p className="text-sm font-medium text-muted-foreground">Height</p>
-            <p className="text-lg font-semibold">{userData.height} cm</p>
-          </div>
-        </div>
+  // Function to fetch profile data
+  const fetchProfile = async () => {
+    setIsLoading(true);
+    setError(null);
+    const token = localStorage.getItem('authToken');
 
-        {/* Optional Separator */}
-        <hr className="my-8" />
+    if (!token) {
+        setError("Not logged in.");
+        setIsLoading(false);
+        navigate('/login'); // Redirect if no token
+        return;
+    }
 
-        {/* Mini Personal Records Preview (Optional) */}
-        <div>
-          {/* Adjusted margin bottom */}
-          <h2 className="mb-5 text-xl font-semibold">Recent Records</h2>
-          {/* Use flex column for the list */}
-          <div className="space-y-3"> {/* Increased spacing between records */}
-            {personalRecords.slice(0, 3).map(record => (
-              // Each record is a flex row with justify-between
-              <div key={record.id} className="flex justify-between items-baseline text-sm">
-                {/* Column 1: Workout Name (takes available space, truncate if needed) */}
-                <span className="flex-1 font-medium pr-4 truncate">{record.workout}</span>
-                {/* Column 2: Details (fixed width or shrink-0, right-aligned text) */}
-                {/* Using text-center for the middle element as per image */}
-                <span className="w-auto flex-shrink-0 px-4 text-center text-muted-foreground">{record.details}</span>
-                {/* Column 3: Time (fixed width or shrink-0, right-aligned text) */}
-                <span className="w-auto flex-shrink-0 text-right font-mono">{record.time}</span>
-              </div>
-            ))}
-            {personalRecords.length > 3 && (
-              <Link to="/personal-records" className="block pt-3 text-center text-sm text-primary hover:underline"> {/* Adjusted padding-top */}
-                View all records...
-              </Link>
-            )}
-            {personalRecords.length === 0 && (
+    try {
+        const response = await fetch('http://localhost:8081/profile', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json', // Indicate we expect JSON
+            },
+        });
+
+        const result: GetProfileResponse = await response.json();
+
+        if (response.ok) {
+            setProfileData(result.profile || null); // Set profile or null if not found
+            if (!result.profile) {
+                console.log("Profile not found, but request OK:", result.message);
+                // Optionally set a specific state if profile is missing but user is authenticated
+            }
+        } else {
+             const errorMessage = result.error || `Failed to load profile (Status: ${response.status}).`;
+             console.error("Profile fetch failed:", errorMessage);
+             setError(errorMessage);
+             if (response.status === 401) { // Handle unauthorized/expired token
+                 setError("Session expired. Please login again.");
+                 localStorage.removeItem('authToken');
+                 setTimeout(() => navigate('/login'), 2000);
+             }
+        }
+    } catch (networkError) {
+        console.error("Network error fetching profile:", networkError);
+        setError("Network error. Could not load profile.");
+    } finally {
+        setIsLoading(false);
+    }
+  };
+
+  // Fetch profile data on component mount
+  useEffect(() => {
+    fetchProfile();
+  }, []); // Empty dependency array means run once on mount
+
 --- END FILE: web\src\pages\app\ProfilePage.tsx ---
 
 --- START FILE (First 100 lines): web\src\pages\app\StartWorkoutPage.tsx ---
@@ -2782,7 +2776,7 @@ import {
 
 --- START FILE (First 100 lines): web\src\pages\CreateProfilePage.tsx ---
 // src/pages/CreateProfilePage.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -2796,91 +2790,91 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
 
+interface ProfileResponse {
+    message?: string;
+    error?: string;
+}
+
+// Define the structure of the data to be sent
+interface ProfilePayload {
+    name?: string;
+    age?: number;
+    height?: number; // Corresponds to height_cm in backend, JSON tag 'height'
+    weight?: number; // Corresponds to weight_kg in backend, JSON tag 'weight'
+}
+
+
 export function CreateProfilePage() {
   const navigate = useNavigate();
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleProfileSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+  const handleProfileSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const profileData = {
-      name: formData.get('name'),
-      age: formData.get('age'),
-      height: formData.get('height'),
-      weight: formData.get('weight'),
-    };
-    console.log("Profile submitted:", profileData);
-    // TODO: Add actual API call to save profile
-    console.log("Profile created (dummy), navigating to dashboard...");
-    navigate('/dashboard');
-  };
+    setError(null);
+    setIsLoading(true);
 
-  const handleSkip = () => {
-    console.log("Profile creation skipped, navigating to dashboard...");
-    // TODO: Maybe mark profile as skipped in backend?
-    navigate('/dashboard');
-  };
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+        setError("Authentication error. Please login again.");
+        setIsLoading(false);
+        setTimeout(() => navigate('/login'), 2000);
+        return;
+    }
 
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-sm">
-        <CardHeader className="space-y-1 text-center">
-          <CardTitle className="text-2xl font-bold">Create Profile</CardTitle>
-          <CardDescription>
-            Enter your details below. You can skip this step.
-          </CardDescription>
-        </CardHeader>
-        <form onSubmit={handleProfileSubmit}>
-          <CardContent className="space-y-4">
-            {/* Name Input */}
-            <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Enter Name Here..."
-                autoComplete="name"
-              />
-            </div>
-            {/* Age Input */}
-            <div className="space-y-2">
-              <Label htmlFor="age">Age</Label>
-              <Input
-                id="age"
-                name="age"
-                type="number"
-                placeholder="Enter Age Here..."
-                min="0"
-              />
-            </div>
-            {/* Height Input */}
-            <div className="space-y-2">
-              <Label htmlFor="height">Height (cm)</Label>
-              <Input
-                id="height"
-                name="height"
-                type="number"
-                placeholder="Enter Height Here..."
-                min="0"
-                step="0.1"
-              />
-            </div>
-            {/* Weight Input */}
-            <div className="space-y-2">
-              <Label htmlFor="weight">Weight (kg)</Label>
-              <Input
-                id="weight"
-                name="weight"
-                type="number"
-                placeholder="Enter Weight Here..."
-                min="0"
-                step="0.1"
-              />
-            </div>
-          </CardContent>
-          {/* Updated Footer Layout: Stacked on mobile, row on sm+, Enter button pushed right */}
-          <CardFooter className="flex flex-col-reverse gap-2 pt-4 sm:flex-row sm:justify-end sm:space-x-2">
-             {/* Skip Button: Outline variant, type="button" to prevent form submission */}
+    // --- Prepare Profile Data (with refined validation) ---
+    const profileData: ProfilePayload = {}; // Use the defined interface
+
+    if (name.trim()) { // Only add name if it's not just whitespace
+        profileData.name = name.trim();
+    }
+
+    // Validate and add age
+    if (age) {
+        const ageNum = parseInt(age, 10);
+        if (isNaN(ageNum) || ageNum < 0) {
+            setError("Please enter a valid age (non-negative number).");
+            setIsLoading(false);
+            return;
+        }
+        profileData.age = ageNum;
+    }
+
+    // Validate and add height
+    if (height) {
+         const heightNum = parseFloat(height);
+         if (isNaN(heightNum) || heightNum <= 0) {
+             setError("Please enter a valid height (positive number).");
+             setIsLoading(false);
+             return;
+         }
+         profileData.height = heightNum; // Assign valid number
+     }
+
+    // Validate and add weight
+     if (weight) {
+         const weightNum = parseFloat(weight);
+         if (isNaN(weightNum) || weightNum <= 0) {
+             setError("Please enter a valid weight (positive number).");
+             setIsLoading(false);
+             return;
+         }
+         profileData.weight = weightNum; // Assign valid number
+     }
+
+     // Check if any data was actually entered (optional, backend might handle empty request)
+     if (Object.keys(profileData).length === 0 && !name && !age && !height && !weight) {
+         // Decide if submitting an empty profile is allowed or show a message
+         // console.log("No profile data entered, skipping API call.");
+         // navigate('/dashboard'); // Or navigate directly if skipping is intended
+         // setIsLoading(false);
+         // return;
+         // For now, let's allow submitting potentially empty data if user clicks Enter
 --- END FILE: web\src\pages\CreateProfilePage.tsx ---
 
 --- START FILE (First 100 lines): web\src\pages\LandingPage.tsx ---
@@ -2938,6 +2932,7 @@ export default LandingPage;
 
 --- START FILE (First 100 lines): web\src\pages\LoginPage.tsx ---
 // src/pages/LoginPage.tsx
+import React, { useState } from "react"; // Import React and useState
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -2949,34 +2944,66 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom";
+
+// Expected response structure from backend /login
+interface LoginResponse {
+    token?: string;
+    message?: string; // Optional success message
+    error?: string;
+}
 
 export function LoginPage() {
-  const navigate = useNavigate(); // <-- Initialize navigate hook
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLoginSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevent default form submission
+  const handleLoginSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError(null);
+    setIsLoading(true);
 
-    // Dummy action: Log form data
-    const formData = new FormData(event.currentTarget);
-    const loginData = {
-      email: formData.get('email'),
-      // Don't log passwords in real applications
-      // password: formData.get('password'),
-    };
-    console.log("Login submitted with data:", loginData);
+    if (!email || !password) {
+        setError("Email and password are required.");
+        setIsLoading(false);
+        return;
+    }
 
-    // Add your actual login logic here (e.g., API call, validation)
-    // Simulate successful login
-    const isLoginSuccessful = true; // Replace with actual check
+    const loginData = { email, password };
 
-    if (isLoginSuccessful) {
-      console.log("Login successful (dummy), navigating to dashboard...");
-      navigate('/dashboard'); // <-- Navigate to /dashboard on success
-    } else {
-      // Handle login failure (e.g., show error message)
-      console.error("Login failed (dummy)");
-      // Example: setError("Invalid email or password.");
+    try {
+        const response = await fetch('http://localhost:8080/login', { // Target the backend login endpoint
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(loginData),
+        });
+
+        const result: LoginResponse = await response.json();
+
+        if (response.ok && result.token) {
+            // --- Login Successful ---
+            console.log("Login successful");
+            // Store the token securely (localStorage is simple, consider more secure options for production)
+            localStorage.setItem('authToken', result.token);
+            // Navigate to the main app dashboard/profile page
+            navigate('/dashboard'); // Or '/profile'
+
+        } else {
+            // --- Login Failed (Backend Error or No Token) ---
+            const errorMessage = result.error || `Login failed (Status: ${response.status}). Please check credentials.`;
+            console.error("Login failed:", errorMessage);
+            setError(errorMessage);
+        }
+    } catch (networkError) {
+        // --- Network or other fetch errors ---
+        console.error("Network error during login:", networkError);
+        setError("Network error. Please check your connection and try again.");
+    } finally {
+        setIsLoading(false); // Stop loading regardless of outcome
     }
   };
 
@@ -2996,47 +3023,14 @@ export function LoginPage() {
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
-                name="email" // Add name attribute for FormData access
+                name="email"
                 type="email"
                 placeholder="you@example.com"
                 required
                 autoComplete="email"
-              />
-            </div>
-            {/* Password Input */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
-                <Link
-                  to="/forgot-password" // Link to a future forgot password page
-                  className="text-sm text-muted-foreground hover:text-primary underline-offset-4 hover:underline"
-                >
-                  Forgot password?
-                </Link>
-              </div>
-              <Input
-                id="password"
-                name="password" // Add name attribute for FormData access
-                type="password"
-                placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
-                required
-                autoComplete="current-password"
-              />
-            </div>
-             {/* Placeholder for error messages if needed */}
-             {/* {error && <p className="text-sm text-destructive">{error}</p>} */}
-          </CardContent>
-          <CardFooter className="flex flex-col space-y-4">
-             <Button type="submit" className="w-full">
-              Login
-            </Button>
-             <p className="text-center text-sm text-muted-foreground">
-              Don't have an account?{' '}
-              <Link
-                to="/register" // Link to the register page
-                className="font-medium text-primary underline-offset-4 hover:underline"
-              >
-                Register
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isLoading}
 --- END FILE: web\src\pages\LoginPage.tsx ---
 
 --- START FILE (First 100 lines): web\src\pages\RegisterPage.tsx ---
@@ -3053,33 +3047,82 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState } from "react"; // Ensure useState is imported
+
+// Define the expected API response structure (adjust if needed)
+interface RegisterResponse {
+  message?: string; // Success message
+  error?: string;   // Error message from backend
+}
 
 export function RegisterPage() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState(''); // Add state for email
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState(''); // Optional phone number state
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
 
-  const handleRegisterSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleRegisterSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
+    setIsLoading(true); // Start loading
 
+    // --- Frontend Validation ---
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
+      setIsLoading(false); // Stop loading
       return;
     }
 
-    console.log("Registration submitted with data:", {
-      email: event.currentTarget.email.value,
-      // Don't log sensitive data in production
-      // password: password,
-      phoneNumber: event.currentTarget.phoneNumber.value,
-    });
+    if (!email || !password) {
+        setError("Email and password are required.");
+        setIsLoading(false); // Stop loading
+        return;
+    }
+    // Add more email/password strength validation if desired
 
-    // On successful registration (dummy):
-    console.log("Registration successful (dummy), navigating to create profile...");
-    navigate('/create-profile'); // <-- Navigate to Create Profile page now
+    // --- API Call ---
+    // Note: The backend /register endpoint currently only expects email and password.
+    // Phone number is collected here but not sent in this request.
+    // It would likely be sent during profile creation/update later.
+    const registrationData = {
+        email: email,
+        password: password,
+    };
+
+    try {
+        const response = await fetch('http://localhost:8080/register', { // Use the backend endpoint URL
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(registrationData),
+        });
+
+        const result: RegisterResponse = await response.json();
+
+        if (response.ok) {
+            // --- Registration Successful ---
+            console.log("Registration successful:", result.message || 'Success');
+            // Navigate to the next step (e.g., create profile or login)
+            // Keeping navigation to /create-profile as per previous logic
+            navigate('/create-profile');
+            // Or navigate to login if preferred: navigate('/login');
+
+        } else {
+            // --- Registration Failed (Backend Error) ---
+            console.error("Registration failed:", result.error || `HTTP error! status: ${response.status}`);
+            setError(result.error || `Registration failed (Status: ${response.status}). Please try again.`);
+        }
+    } catch (networkError) {
+        // --- Network or other fetch errors ---
+        console.error("Network error during registration:", networkError);
+        setError("Network error. Please check your connection and try again.");
+    } finally {
+        setIsLoading(false); // Stop loading regardless of outcome
+    }
   };
 
   return (
@@ -3091,55 +3134,6 @@ export function RegisterPage() {
             Enter your details below to create an account
           </CardDescription>
         </CardHeader>
-        <form onSubmit={handleRegisterSubmit}>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="you@example.com"
-                required
-                autoComplete="email"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
-                required
-                autoComplete="new-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirm Password</Label>
-              <Input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
-                required
-                autoComplete="new-password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className={error ? 'border-destructive' : ''}
-              />
-            </div>
-             <div className="space-y-2">
-              <Label htmlFor="phoneNumber">Phone Number (Optional)</Label>
-              <Input
-                id="phoneNumber"
-                name="phoneNumber"
-                type="tel"
-                placeholder="(123) 456-7890"
-                autoComplete="tel"
-              />
 --- END FILE: web\src\pages\RegisterPage.tsx ---
 
 --- START FILE (First 100 lines): web\src\types\workout.ts ---
